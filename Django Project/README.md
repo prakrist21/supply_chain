@@ -1,6 +1,6 @@
 # Django Project
 
-This is a vanilla Django 5.2.6 starting project created for the WAT-2025 repository.
+This is a vanilla Django 5.2.6 starting project.
 
 ## Setup
 

@@ -30,16 +30,16 @@ A vanilla Django 5.2.6 starting project ready for development.
 ### Default Credentials
 
 **Admin Panel:**
--Username: admin
--Password: django123
+  Username: admin
+  Password: django123
 
 **#Council User:**
--Username: council1
--Password: django123
+  Username: council1
+  Password: django123
 
 **#Contractor User:**
--Username: contractor1
--Password: django123
+  Username: contractor1
+  Password: django123
 
 ### Dependencies
 
