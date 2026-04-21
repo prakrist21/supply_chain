@@ -1,0 +1,516 @@
+{% extends 'supply_chain/base.html' %}
+
+{% block title %}Browse Projects - Supply Chain System{% endblock %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        line-height: 1.6;
+    }
+    .page-header {
+        margin-bottom: 24px;
+    }
+    .page-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1A1F2E;
+        margin-bottom: 4px;
+    }
+    .page-subtitle {
+        font-size: 14px;
+        color: #6B7280;
+        font-weight: 400;
+    }
+    .filters-section {
+        background: #F9FAFB;
+        padding: 24px;
+        border-radius: 12px;
+        margin-bottom: 24px;
+        border: 1px solid #E5E7EB;
+    }
+    .filter-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr auto;
+        gap: 12px;
+        align-items: end;
+    }
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+    .filter-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #4B5563;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .filter-input {
+        padding: 12px 16px;
+        border: 1px solid #E5E7EB;
+        border-radius: 10px;
+        font-size: 14px;
+        background: #FFFFFF;
+        transition: all 0.15s ease;
+    }
+    .filter-input:focus {
+        outline: none;
+        border-color: #00BF62;
+        box-shadow: 0 0 0 3px rgba(0, 191, 98, 0.1);
+    }
+    .btn-filter {
+        padding: 12px 32px;
+        background: #00BF62;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        height: fit-content;
+    }
+    .btn-filter:hover {
+        background: #009951;
+        box-shadow: 0 4px 12px rgba(0, 191, 98, 0.25);
+    }
+    .projects-grid {
+        display: grid;
+        gap: 20px;
+    }
+    .project-card {
+        background: #FFFFFF;
+        border: 1px solid #E5E7EB;
+        border-radius: 12px;
+        padding: 24px;
+        transition: all 0.15s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    .project-card:hover {
+        border-color: #00BF62;
+        box-shadow: 0 4px 12px rgba(0, 191, 98, 0.15);
+    }
+    .project-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        margin-bottom: 16px;
+    }
+    .project-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1A1F2E;
+        margin-bottom: 4px;
+    }
+    .bid-submitted-badge {
+        padding: 6px 12px;
+        background: #D1FAE5;
+        color: #065F46;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .council-name {
+        font-size: 13px;
+        color: #6B7280;
+        font-weight: 500;
+    }
+    .project-description {
+        color: #4B5563;
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+    .project-info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 16px;
+        margin-bottom: 20px;
+        padding: 20px;
+        background: #F9FAFB;
+        border-radius: 10px;
+    }
+    .info-item {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+    .info-label {
+        font-size: 12px;
+        color: #9CA3AF;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+    .info-value {
+        font-size: 18px;
+        font-weight: 700;
+        color: #1A1F2E;
+    }
+    .info-value.budget {
+        color: #00BF62;
+    }
+    .info-value.packages {
+        color: #00BF62;
+    }
+    .project-timeline {
+        display: flex;
+        justify-content: space-between;
+        padding: 16px;
+        background: #E6F9F0;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+    .timeline-item {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+    .timeline-label {
+        font-size: 12px;
+        color: #00BF62;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .timeline-date {
+        font-size: 16px;
+        font-weight: 700;
+        color: #1A1F2E;
+    }
+    .timeline-arrow {
+        display: flex;
+        align-items: center;
+        color: #00BF62;
+        font-size: 18px;
+    }
+    .project-footer {
+        display: flex;
+        gap: 12px;
+    }
+    .btn-view-project {
+        flex: 1;
+        padding: 12px 16px;
+        background: #00BF62;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 600;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+    .btn-view-project:hover {
+        background: #009951;
+        box-shadow: 0 4px 12px rgba(0, 191, 98, 0.25);
+    }
+    .empty-state {
+        text-align: center;
+        padding: 64px 16px;
+        background: #F9FAFB;
+        border-radius: 12px;
+        border: 1px solid #E5E7EB;
+    }
+    .empty-icon {
+        width: 64px;
+        height: 64px;
+        margin: 0 auto 20px;
+        color: #D1D5DB;
+    }
+    .empty-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1A1F2E;
+        margin-bottom: 8px;
+    }
+    .empty-text {
+        font-size: 14px;
+        color: #6B7280;
+        line-height: 1.6;
+    }
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .status-badge.expired {
+        background: #FEE2E2;
+        color: #991B1B;
+        border: 1px solid #FCA5A5;
+    }
+    .status-badge.ending-soon {
+        background: #FEF3C7;
+        color: #92400E;
+        border: 1px solid #FDE68A;
+    }
+    .status-badge.active {
+        background: #D1FAE5;
+        color: #065F46;
+        border: 1px solid #6EE7B7;
+    }
+    .status-badge.completed {
+        background: #DBEAFE;
+        color: #1E40AF;
+        border: 1px solid #93C5FD;
+    }
+    .project-card.expired .btn-view-project {
+        background: #9CA3AF;
+    }
+    .project-card.expired .btn-view-project:hover {
+        background: #6B7280;
+    }
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin-top: 32px;
+        padding: 16px;
+    }
+    .pagination-btn {
+        padding: 8px 16px;
+        background: #FFFFFF;
+        color: #00BF62;
+        border: 1px solid #E5E7EB;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.15s ease;
+    }
+    .pagination-btn:hover {
+        background: #00BF62;
+        color: #FFFFFF;
+        border-color: #00BF62;
+    }
+    .pagination-btn.active {
+        background: #00BF62;
+        color: #FFFFFF;
+        border-color: #00BF62;
+    }
+    .pagination-btn.disabled {
+        background: #F9FAFB;
+        color: #D1D5DB;
+        border-color: #E5E7EB;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+    .pagination-info {
+        color: #6B7280;
+        font-size: 14px;
+        font-weight: 500;
+    }
+    @media (max-width: 968px) {
+        .filter-grid {
+            grid-template-columns: 1fr;
+        }
+        .project-info-grid {
+            grid-template-columns: 1fr;
+        }
+        .project-timeline {
+            flex-direction: column;
+            gap: 12px;
+        }
+        .timeline-arrow {
+            transform: rotate(90deg);
+        }
+        .project-footer {
+            flex-direction: column;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">Browse Open Projects</h1>
+    <p class="page-subtitle">Find and bid on available construction projects</p>
+</div>
+
+<div class="filters-section">
+    <form method="GET" action="">
+        <div class="filter-grid">
+            <div class="filter-group">
+                <label class="filter-label">Search Projects</label>
+                <input
+                    type="text"
+                    name="search"
+                    class="filter-input"
+                    placeholder="Search by title or description..."
+                    value="{{ search_query }}"
+                >
+            </div>
+            <div class="filter-group">
+                <label class="filter-label">Max Budget (£)</label>
+                <input
+                    type="number"
+                    name="max_budget"
+                    class="filter-input"
+                    placeholder="e.g., 5000000"
+                    value="{{ max_budget }}"
+                >
+            </div>
+            <button type="submit" class="btn-filter">Apply Filters</button>
+        </div>
+    </form>
+</div>
+
+<div class="projects-grid">
+    {% if projects %}
+        {% for project in projects %}
+        {% load tz %}
+        {% now "Y-m-d" as today %}
+        <div class="project-card {% if project.id in contractor_bids %}bid-submitted{% endif %} {% if project.status == 'completed' or project.status == 'expired' or project.end_date|date:'Y-m-d' < today %}expired{% endif %}">
+            <div class="project-top">
+                <div>
+                    <h2 class="project-title">{{ project.title }}</h2>
+                    <p class="council-name">{{ project.council.name }} Council</p>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-end;">
+                    {% if project.status == 'completed' %}
+                        <span class="status-badge completed">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                            </svg>
+                            COMPLETED
+                        </span>
+                    {% elif project.status == 'expired' or project.end_date|date:"Y-m-d" < today %}
+                        <span class="status-badge expired">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                            </svg>
+                            EXPIRED
+                        </span>
+                    {% else %}
+                        <span class="status-badge active">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                            </svg>
+                            ACTIVE
+                        </span>
+                    {% endif %}
+                    {% if project.id in contractor_bids %}
+                        <span class="bid-submitted-badge">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                            </svg>
+                            You've Submitted a Bid
+                        </span>
+                    {% endif %}
+                </div>
+            </div>
+            <p class="project-description">{{ project.description|truncatewords:40 }}</p>
+            <div class="project-info-grid">
+                <div class="info-item">
+                    <span class="info-label">Total Budget</span>
+                    <span class="info-value budget">£ {{ project.budget|floatformat:0 }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Available Packages</span>
+                    <span class="info-value packages">{{ project.available_packages }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Total Packages</span>
+                    <span class="info-value">{{ project.package_count }}</span>
+                </div>
+            </div>
+            <div class="project-timeline">
+                <div class="timeline-item">
+                    <span class="timeline-label">Start Date</span>
+                    <span class="timeline-date">{{ project.start_date|date:"M d, Y" }}</span>
+                </div>
+                <div class="timeline-arrow">→</div>
+                <div class="timeline-item">
+                    <span class="timeline-label">End Date</span>
+                    <span class="timeline-date">{{ project.end_date|date:"M d, Y" }}</span>
+                </div>
+            </div>
+            <div class="project-footer">
+                {% if project.end_date|date:"Y-m-d" < today %}
+                    <a href="{% url 'contractor_project_detail' project.id %}" class="btn-view-project">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                        </svg>
+                        <span>View Closed Project</span>
+                    </a>
+                {% else %}
+                    <a href="{% url 'contractor_project_detail' project.id %}" class="btn-view-project">
+                        <span>View Full Details</span>
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                        </svg>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="empty-state">
+            <svg class="empty-icon" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+            <h3 class="empty-title">No Projects Available</h3>
+            <p class="empty-text">
+                {% if search_query or max_budget %}
+                    No projects match your search criteria. Try adjusting your filters to see more results.
+                {% else %}
+                    There are currently no open projects accepting bids. Check back later for new opportunities!
+                {% endif %}
+            </p>
+        </div>
+    {% endif %}
+</div>
+
+{% if page_obj.has_other_pages %}
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?page=1{% if search_query %}&search={{ search_query }}{% endif %}{% if max_budget %}&max_budget={{ max_budget }}{% endif %}" class="pagination-btn">«</a>
+        <a href="?page={{ page_obj.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if max_budget %}&max_budget={{ max_budget }}{% endif %}" class="pagination-btn">‹</a>
+    {% else %}
+        <span class="pagination-btn disabled">«</span>
+        <span class="pagination-btn disabled">‹</span>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+            <span class="pagination-btn active">{{ num }}</span>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a href="?page={{ num }}{% if search_query %}&search={{ search_query }}{% endif %}{% if max_budget %}&max_budget={{ max_budget }}{% endif %}" class="pagination-btn">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if max_budget %}&max_budget={{ max_budget }}{% endif %}" class="pagination-btn">›</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}{% if search_query %}&search={{ search_query }}{% endif %}{% if max_budget %}&max_budget={{ max_budget }}{% endif %}" class="pagination-btn">»</a>
+    {% else %}
+        <span class="pagination-btn disabled">›</span>
+        <span class="pagination-btn disabled">»</span>
+    {% endif %}
+
+    <span class="pagination-info">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,251 @@
+{% extends 'supply_chain/base.html' %}
+
+{% block title %}My Profile - Supply Chain System{% endblock %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+    * {
+        font-family: 'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    }
+
+    .profile-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 36px 18px;
+    }
+
+    .profile-header {
+        background: #FFFFFF;
+        border: 1px solid #E5E7EB;
+        padding: 32px;
+        border-radius: 12px;
+        margin-bottom: 27px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .profile-header-content {
+        display: flex;
+        align-items: center;
+        gap: 26px;
+    }
+
+    .profile-avatar {
+        width: 88px;
+        height: 88px;
+        background: #E6F9F0;
+        color: #00BF62;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 36px;
+        font-weight: 700;
+        flex-shrink: 0;
+    }
+
+    .profile-info h1 {
+        margin: 0 0 7px 0;
+        font-size: 26px;
+        font-weight: 800;
+        color: #1A1F2E;
+        line-height: 1.6;
+    }
+
+    .profile-username {
+        font-size: 15px;
+        margin-bottom: 7px;
+        color: #6B7280;
+        line-height: 1.6;
+    }
+
+    .user-type-badge {
+        display: inline-block;
+        background: #E6F9F0;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #00BF62;
+    }
+
+    .profile-actions {
+        margin-top: 26px;
+        margin-bottom: 27px;
+        display: flex;
+        gap: 13px;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        padding: 11px 22px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        transition: all 0.15s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        border: none;
+        cursor: pointer;
+        line-height: 1.6;
+    }
+
+    .btn-primary {
+        background: #00BF62;
+        color: #FFFFFF;
+        box-shadow: 0 4px 12px rgba(0,191,98,0.25);
+    }
+
+    .btn-primary:hover {
+        background: #009951;
+    }
+
+    .btn-secondary {
+        background: #F3F4F6;
+        color: #374151;
+    }
+
+    .btn-secondary:hover {
+        background: #E5E7EB;
+    }
+
+    .profile-details {
+        background: #FFFFFF;
+        border-radius: 12px;
+        padding: 32px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        border: 1px solid #E5E7EB;
+    }
+
+    .profile-details h2 {
+        font-size: 19px;
+        font-weight: 700;
+        color: #1A1F2E;
+        margin-bottom: 26px;
+        padding-bottom: 13px;
+        border-bottom: 1px solid #E5E7EB;
+        line-height: 1.6;
+    }
+
+    .details-grid {
+        display: grid;
+        gap: 22px;
+    }
+
+    .detail-item {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .detail-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #6B7280;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .detail-value {
+        font-size: 15px;
+        color: #1A1F2E;
+        font-weight: 500;
+        line-height: 1.6;
+    }
+
+    .no-profile {
+        text-align: center;
+        padding: 54px 18px;
+        color: #6B7280;
+    }
+
+    .no-profile svg {
+        width: 72px;
+        height: 72px;
+        margin-bottom: 18px;
+        opacity: 0.5;
+    }
+
+    @media (max-width: 768px) {
+        .profile-header-content {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 76px;
+            height: 76px;
+            font-size: 32px;
+        }
+
+        .profile-info h1 {
+            font-size: 22px;
+        }
+
+        .profile-actions {
+            justify-content: center;
+        }
+
+        .profile-details {
+            padding: 23px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    {% if profile %}
+        <div class="profile-header">
+            <div class="profile-header-content">
+                <div class="profile-avatar">
+                    {{ user.username|slice:":1"|upper }}
+                </div>
+                <div class="profile-info">
+                    <h1>{{ profile.name }}</h1>
+                    <p class="profile-username">@{{ user.username }}</p>
+                    <span class="user-type-badge">{{ user_type }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-actions">
+            <a href="{% url 'profile_edit' %}" class="btn btn-primary">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                </svg>
+                Edit Profile
+            </a>
+            <a href="{% url 'password_change' %}" class="btn btn-secondary">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                </svg>
+                Change Password
+            </a>
+        </div>
+
+        <div class="profile-details">
+            <h2>Profile Information</h2>
+            <div class="details-grid">
+                {% for field in profile_fields %}
+                <div class="detail-item">
+                    <span class="detail-label">{{ field.label }}</span>
+                    <span class="detail-value">{{ field.value }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="no-profile">
+            <svg fill="currentColor" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+            </svg>
+            <h2>No Profile Found</h2>
+            <p>Your account doesn't have an associated profile.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

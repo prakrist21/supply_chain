@@ -1,0 +1,546 @@
+{% extends 'supply_chain/base.html' %}
+
+{% block title %}Reports - Council{% endblock %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        line-height: 1.6;
+    }
+    .reports-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 32px;
+    }
+    .page-header {
+        margin-bottom: 32px;
+    }
+    .page-header h1 {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1A1F2E;
+        margin-bottom: 4px;
+    }
+    .page-header p {
+        color: #6B7280;
+        font-size: 14px;
+    }
+    .summary-section {
+        margin-bottom: 40px;
+    }
+    .section-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1A1F2E;
+        margin-bottom: 24px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #00BF62;
+    }
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 16px;
+        margin-bottom: 32px;
+    }
+    .stat-card {
+        background: #00BF62;
+        padding: 24px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        color: #FFFFFF;
+        transition: all 0.15s ease;
+    }
+    .stat-card:hover {
+        background: #009951;
+        box-shadow: 0 4px 12px rgba(0, 191, 98, 0.25);
+    }
+    .stat-label {
+        font-size: 13px;
+        opacity: 0.9;
+        margin-bottom: 8px;
+        font-weight: 500;
+    }
+    .stat-value {
+        font-size: 32px;
+        font-weight: 800;
+        margin-bottom: 4px;
+    }
+    .stat-change {
+        font-size: 12px;
+        opacity: 0.85;
+    }
+    .charts-section {
+        margin-bottom: 40px;
+    }
+    .charts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+        gap: 24px;
+    }
+    .chart-card {
+        background: #FFFFFF;
+        padding: 24px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        border: 1px solid #E5E7EB;
+    }
+    .chart-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #1A1F2E;
+        margin-bottom: 16px;
+    }
+    .chart-container {
+        height: 300px;
+        position: relative;
+    }
+    .projects-section {
+        margin-bottom: 40px;
+    }
+    .table-wrapper {
+        background: #FFFFFF;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        overflow: hidden;
+        border: 1px solid #E5E7EB;
+    }
+    .projects-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .projects-table thead {
+        background: #1A1F2E;
+        color: #FFFFFF;
+    }
+    .projects-table th {
+        padding: 16px 12px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+    }
+    .projects-table tbody tr {
+        border-bottom: 1px solid #E5E7EB;
+        transition: background-color 0.15s ease;
+    }
+    .projects-table tbody tr:hover {
+        background-color: #F9FAFB;
+    }
+    .projects-table td {
+        padding: 12px;
+        font-size: 14px;
+        color: #4B5563;
+    }
+    .project-name {
+        font-weight: 600;
+        color: #1A1F2E;
+    }
+    .budget-amount {
+        font-weight: 600;
+        color: #00BF62;
+    }
+    .download-btn {
+        background: #00BF62;
+        color: #FFFFFF;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 13px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .download-btn:hover {
+        background: #009951;
+        box-shadow: 0 4px 12px rgba(0, 191, 98, 0.25);
+    }
+    .badge {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+    .badge-success {
+        background: #D1FAE5;
+        color: #065F46;
+    }
+    .badge-warning {
+        background: #FEF3C7;
+        color: #92400E;
+    }
+    .badge-info {
+        background: #DBEAFE;
+        color: #1E40AF;
+    }
+    .no-data {
+        text-align: center;
+        padding: 48px 16px;
+        color: #6B7280;
+        font-size: 14px;
+    }
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin-top: 24px;
+        padding: 16px;
+    }
+    .pagination-btn {
+        padding: 8px 16px;
+        background: #FFFFFF;
+        color: #00BF62;
+        border: 1px solid #E5E7EB;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.15s ease;
+    }
+    .pagination-btn:hover {
+        background: #00BF62;
+        color: #FFFFFF;
+        border-color: #00BF62;
+    }
+    .pagination-btn.active {
+        background: #00BF62;
+        color: #FFFFFF;
+        border-color: #00BF62;
+    }
+    .pagination-btn.disabled {
+        background: #F9FAFB;
+        color: #D1D5DB;
+        border-color: #E5E7EB;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+    .pagination-info {
+        color: #6B7280;
+        font-size: 14px;
+        font-weight: 500;
+    }
+    @media (max-width: 768px) {
+        .charts-grid {
+            grid-template-columns: 1fr;
+        }
+        .table-wrapper {
+            overflow-x: auto;
+        }
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="reports-container">
+    <div class="page-header">
+        <h1>Reports & Analytics</h1>
+        <p>Comprehensive overview of all projects, bids, and financial data</p>
+    </div>
+
+    <section class="summary-section">
+        <h2 class="section-title">Overall Summary</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Projects</div>
+                <div class="stat-value">{{ total_projects }}</div>
+                <div class="stat-change">Active & Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total Packages</div>
+                <div class="stat-value">{{ total_packages }}</div>
+                <div class="stat-change">Across all projects</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total Bids Received</div>
+                <div class="stat-value">{{ total_bids_received }}</div>
+                <div class="stat-change">{{ pending_bids }} pending</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total Budget</div>
+                <div class="stat-value">£ {{ total_budget|floatformat:0 }}</div>
+                <div class="stat-change">All projects combined</div>
+            </div>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Approved Bids</div>
+                <div class="stat-value">{{ approved_bids }}</div>
+                <div class="stat-change">Successfully awarded</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Pending Bids</div>
+                <div class="stat-value">{{ pending_bids }}</div>
+                <div class="stat-change">Awaiting review</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Rejected Bids</div>
+                <div class="stat-value">{{ rejected_bids }}</div>
+                <div class="stat-change">Not approved</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Awarded Budget</div>
+                <div class="stat-value">£ {{ awarded_budget|floatformat:0 }}</div>
+                <div class="stat-change">Total contract value</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="charts-section">
+        <h2 class="section-title">Visual Analytics</h2>
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3 class="chart-title">Project Budgets</h3>
+                <div class="chart-container">
+                    <canvas id="budgetChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3 class="chart-title">Bid Status Distribution</h3>
+                <div class="chart-container">
+                    <canvas id="bidStatusChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3 class="chart-title">Packages per Project</h3>
+                <div class="chart-container">
+                    <canvas id="packagesChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3 class="chart-title">Bids per Project</h3>
+                <div class="chart-container">
+                    <canvas id="bidsChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects-section">
+        <h2 class="section-title">Individual Project Reports</h2>
+        {% if page_obj %}
+        <div class="table-wrapper">
+            <table class="projects-table">
+                <thead>
+                    <tr>
+                        <th>Project Name</th>
+                        <th>Budget</th>
+                        <th>Packages</th>
+                        <th>Bids</th>
+                        <th>Awarded</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for project in page_obj %}
+                    <tr>
+                        <td class="project-name">{{ project.title }}</td>
+                        <td class="budget-amount">£ {{ project.budget|floatformat:2 }}</td>
+                        <td>{{ project.package_count }}</td>
+                        <td>{{ project.bid_count }}</td>
+                        <td>
+                            {% if project.total_awarded %}
+                                £ {{ project.total_awarded|floatformat:2 }}
+                            {% else %}
+                                £ 0.00
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if project.approved_bid_count > 0 %}
+                                <span class="badge badge-success">{{ project.approved_bid_count }} Awarded</span>
+                            {% elif project.bid_count > 0 %}
+                                <span class="badge badge-warning">{{ project.bid_count }} Bids</span>
+                            {% else %}
+                                <span class="badge badge-info">No Bids</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{% url 'download_project_report' project.id %}" class="download-btn">
+                                Download Report
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% if page_obj.has_other_pages %}
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page=1" class="pagination-btn">«</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="pagination-btn">‹</a>
+            {% else %}
+                <span class="pagination-btn disabled">«</span>
+                <span class="pagination-btn disabled">‹</span>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <span class="pagination-btn active">{{ num }}</span>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a href="?page={{ num }}" class="pagination-btn">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="pagination-btn">›</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="pagination-btn">»</a>
+            {% else %}
+                <span class="pagination-btn disabled">›</span>
+                <span class="pagination-btn disabled">»</span>
+            {% endif %}
+
+            <span class="pagination-info">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        </div>
+        {% endif %}
+
+        {% else %}
+        <div class="no-data">
+            <p>No projects available to generate reports.</p>
+        </div>
+        {% endif %}
+    </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+
+<script>
+    const budgetCtx = document.getElementById('budgetChart').getContext('2d');
+    new Chart(budgetCtx, {
+        type: 'bar',
+        data: {
+            labels: {{ project_names|safe }},
+            datasets: [{
+                label: 'Budget (£)',
+                data: {{ project_budgets|safe }},
+                backgroundColor: 'rgba(0, 191, 98, 0.7)',
+                borderColor: 'rgba(0, 191, 98, 1)',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return '£ ' + value.toLocaleString();
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    const bidStatusCtx = document.getElementById('bidStatusChart').getContext('2d');
+    new Chart(bidStatusCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Approved', 'Pending', 'Rejected'],
+            datasets: [{
+                data: [{{ approved_bids }}, {{ pending_bids }}, {{ rejected_bids }}],
+                backgroundColor: [
+                    'rgba(0, 191, 98, 0.8)',
+                    'rgba(245, 158, 11, 0.8)',
+                    'rgba(239, 68, 68, 0.8)'
+                ],
+                borderWidth: 2,
+                borderColor: '#ffffff'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+
+    const packagesCtx = document.getElementById('packagesChart').getContext('2d');
+    new Chart(packagesCtx, {
+        type: 'bar',
+        data: {
+            labels: {{ project_names|safe }},
+            datasets: [{
+                label: 'Number of Packages',
+                data: {{ project_packages|safe }},
+                backgroundColor: 'rgba(0, 191, 98, 0.7)',
+                borderColor: 'rgba(0, 191, 98, 1)',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1
+                    }
+                }
+            }
+        }
+    });
+
+    const bidsCtx = document.getElementById('bidsChart').getContext('2d');
+    new Chart(bidsCtx, {
+        type: 'line',
+        data: {
+            labels: {{ project_names|safe }},
+            datasets: [{
+                label: 'Total Bids Received',
+                data: {{ project_bids|safe }},
+                backgroundColor: 'rgba(0, 191, 98, 0.2)',
+                borderColor: 'rgba(0, 191, 98, 1)',
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1
+                    }
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

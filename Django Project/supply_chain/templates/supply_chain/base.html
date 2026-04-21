@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Supply Chain System{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            background-color: #FFFFFF;
+            color: #1A1F2E;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        nav {
+            background: #1A1F2E;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+        }
+
+        .nav-brand {
+            color: #FFFFFF;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-links a {
+            color: #D1D5DB;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: 10px;
+            transition: all 0.15s ease;
+        }
+
+        .nav-links a.logout {
+            background-color: #EF4444;
+            color: #FFFFFF;
+        }
+
+        .nav-links a:hover {
+            background-color: #2D3548;
+            color: #FFFFFF;
+        }
+
+        .nav-links a.logout:hover {
+            background-color: #DC2626;
+        }
+
+        .messages-container {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 9999;
+            max-width: 400px;
+        }
+
+        .alert {
+            padding: 16px 40px 16px 16px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.10);
+            position: relative;
+            animation: slideIn 0.3s ease-out;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .alert-success {
+            background: #00BF62;
+            color: #FFFFFF;
+        }
+
+        .alert-error, .alert-danger {
+            background: #EF4444;
+            color: #FFFFFF;
+        }
+
+        .alert-info {
+            background: #3B82F6;
+            color: #FFFFFF;
+        }
+
+        .alert-warning {
+            background: #F59E0B;
+            color: #FFFFFF;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #FFFFFF;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            line-height: 1;
+            opacity: 0.8;
+            transition: opacity 0.15s;
+        }
+
+        .close-btn:hover {
+            opacity: 1;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+            background-color: #F9FAFB;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: #F8FAFB;
+            border-right: 1px solid #E5E7EB;
+            padding: 24px 0;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .sidebar h2 {
+            padding: 0 24px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #6B7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 24px;
+        }
+
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-item {
+            margin-bottom: 4px;
+            padding: 0 12px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            text-decoration: none;
+            color: #4B5563;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.15s ease;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            background: #E6F9F0;
+            color: #009951;
+        }
+
+        .nav-link.active {
+            background: #E6F9F0;
+            color: #00BF62;
+            font-weight: 600;
+        }
+
+        .nav-link.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 20px;
+            background: #00BF62;
+            border-radius: 2px;
+        }
+
+        .container {
+            flex: 1;
+            padding: 32px;
+            background-color: #FFFFFF;
+            overflow-y: auto;
+        }
+
+        .no-sidebar .sidebar {
+            display: none;
+        }
+
+        .no-sidebar .container {
+            width: 100%;
+        }
+
+        footer {
+            background: #1A1F2E;
+            color: #9CA3AF;
+            text-align: center;
+            padding: 24px;
+            margin-top: auto;
+            font-size: 14px;
+            border-top: 1px solid #2D3548;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 16px 0;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .sidebar {
+                width: 220px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .messages-container {
+                left: 16px;
+                right: 16px;
+                max-width: none;
+                top: 80px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .sidebar {
+                display: none;
+            }
+
+            .content-wrapper {
+                flex-direction: column;
+            }
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-brand">SupplyCore</a>
+            <div class="nav-links">
+                {% if user.is_authenticated %}
+                    {% if user.council %}
+                        <a href="{% url 'councilDashboard' %}">Dashboard</a>
+                        <a href="{% url 'project_list' %}">Projects</a>
+                        <a href="{% url 'council_all_bids' %}">Bids</a>
+                    {% elif user.contractor %}
+                        <a href="{% url 'contractorDashboard' %}">Dashboard</a>
+                        <a href="{% url 'open_projects' %}">Projects</a>
+                        <a href="{% url 'contractor_my_bids' %}">My Bids</a>
+                    {% else %}
+                        <a href="#">Dashboard</a>
+                        <a href="#">Projects</a>
+                        <a href="#">Bids</a>
+                    {% endif %}
+                    <a href="{% url 'logout' %}" class="logout">Logout</a>
+                {% else %}
+                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'register' %}">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+            <button type="button" class="close-btn" onclick="this.parentElement.remove()">×</button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="content-wrapper {% block wrapper_class %}{% endblock %}">
+        {% if user.is_authenticated %}
+            {% if user.council %}
+                <div class="sidebar">
+                    <h2>Council</h2>
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="{% url 'councilDashboard' %}" class="nav-link {% if request.resolver_match.url_name == 'councilDashboard' %}active{% endif %}">
+                                <span class="nav-text">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'project_list' %}" class="nav-link {% if request.resolver_match.url_name == 'project_list' %}active{% endif %}">
+                                <span class="nav-text">View Projects</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'project_create' %}" class="nav-link {% if request.resolver_match.url_name == 'project_create' %}active{% endif %}">
+                                <span class="nav-text">Add Project</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'council_all_bids' %}" class="nav-link {% if request.resolver_match.url_name == 'council_all_bids' %}active{% endif %}">
+                                <span class="nav-text">Bids</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'team_list' %}" class="nav-link {% if request.resolver_match.url_name == 'team_list' %}active{% endif %}">
+                                <span class="nav-text">Teams</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'council_reports' %}" class="nav-link {% if request.resolver_match.url_name == 'council_reports' %}active{% endif %}">
+                                <span class="nav-text">Reports</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'my_activity' %}" class="nav-link {% if request.resolver_match.url_name == 'my_activity' %}active{% endif %}">
+                                <span class="nav-text">Activity</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'profile_view' %}" class="nav-link {% if request.resolver_match.url_name == 'profile_view' %}active{% endif %}">
+                                <span class="nav-text">Profile</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            {% elif user.contractor %}
+                <div class="sidebar">
+                    <h2>Contractor</h2>
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="{% url 'contractorDashboard' %}" class="nav-link {% if request.resolver_match.url_name == 'contractorDashboard' %}active{% endif %}">
+                                <span class="nav-text">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'open_projects' %}" class="nav-link {% if request.resolver_match.url_name == 'open_projects' %}active{% endif %}">
+                                <span class="nav-text">Browse Projects</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'contractor_my_bids' %}" class="nav-link {% if request.resolver_match.url_name == 'contractor_my_bids' %}active{% endif %}">
+                                <span class="nav-text">My Bids</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'team_list' %}" class="nav-link {% if request.resolver_match.url_name == 'team_list' %}active{% endif %}">
+                                <span class="nav-text">My Teams</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'my_activity' %}" class="nav-link {% if request.resolver_match.url_name == 'my_activity' %}active{% endif %}">
+                                <span class="nav-text">Activity</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'profile_view' %}" class="nav-link {% if request.resolver_match.url_name == 'profile_view' %}active{% endif %}">
+                                <span class="nav-text">Profile</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
+        {% endif %}
+
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Supply Chain Management System</p>
+    </footer>
+
+    <!-- Auto-dismiss messages after 5 seconds -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                const alerts = document.querySelectorAll('.alert');
+                alerts.forEach(alert => {
+                    alert.style.opacity = '0';
+                    alert.style.transform = 'translateX(400px)';
+                    alert.style.transition = 'all 0.2s ease-out';
+                    setTimeout(() => alert.remove(), 200);
+                });
+            }, 5000);
+        });
+    </script>
+</body>
+</html>

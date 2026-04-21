@@ -1,0 +1,462 @@
+{% extends 'supply_chain/base.html' %}
+
+{% block title %}Add Package - {{ project.title }}{% endblock %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+    * {
+        font-family: 'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    }
+
+    .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        margin-bottom: 26px;
+        font-size: 14px;
+        color: #6B7280;
+    }
+
+    .breadcrumb a {
+        color: #00BF62;
+        text-decoration: none;
+        transition: all 0.15s ease;
+    }
+
+    .breadcrumb a:hover {
+        color: #009951;
+    }
+
+    .breadcrumb-separator {
+        color: #D1D5DB;
+    }
+
+    .page-header {
+        margin-bottom: 28px;
+    }
+
+    .page-title {
+        font-size: 28px;
+        font-weight: 800;
+        color: #1A1F2E;
+        margin-bottom: 7px;
+        letter-spacing: -0.5px;
+        line-height: 1.6;
+    }
+
+    .page-subtitle {
+        font-size: 15px;
+        color: #6B7280;
+        font-weight: 400;
+        line-height: 1.6;
+    }
+
+    .project-info-banner {
+        background: #F9FAFB;
+        padding: 18px 22px;
+        border-radius: 12px;
+        margin-bottom: 28px;
+        border: 1px solid #E5E7EB;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 14px;
+    }
+
+    .banner-info {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .banner-label {
+        font-size: 12px;
+        color: #6B7280;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    .banner-value {
+        font-size: 17px;
+        font-weight: 700;
+        color: #1A1F2E;
+        line-height: 1.6;
+    }
+
+    .form-container {
+        background: #FFFFFF;
+        border: 1px solid #E5E7EB;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .form-section-title {
+        font-size: 19px;
+        font-weight: 700;
+        color: #1A1F2E;
+        margin-bottom: 22px;
+        padding-bottom: 13px;
+        border-bottom: 1px solid #E5E7EB;
+        line-height: 1.6;
+    }
+
+    .form-group {
+        margin-bottom: 22px;
+    }
+
+    .form-label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        color: #1A1F2E;
+        margin-bottom: 7px;
+        line-height: 1.6;
+    }
+
+    .form-label.required::after {
+        content: ' *';
+        color: #EF4444;
+    }
+
+    .form-input,
+    .form-textarea {
+        width: 100%;
+        padding: 11px 15px;
+        border: 1px solid #E5E7EB;
+        border-radius: 10px;
+        font-size: 14px;
+        font-family: 'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+        transition: all 0.15s ease;
+        background: #FFFFFF;
+        line-height: 1.6;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+        outline: none;
+        border-color: #00BF62;
+        box-shadow: 0 0 0 3px #E6F9F0;
+    }
+
+    .form-textarea {
+        resize: vertical;
+        min-height: 115px;
+        line-height: 1.6;
+    }
+
+    .form-help {
+        font-size: 12px;
+        color: #6B7280;
+        margin-top: 6px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        line-height: 1.6;
+    }
+
+    .help-icon {
+        color: #00BF62;
+    }
+
+    .input-group {
+        position: relative;
+    }
+
+    .input-prefix {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6B7280;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .form-input.with-prefix {
+        padding-left: 45px;
+    }
+
+    .budget-info-card {
+        background: #FEF3C7;
+        border: 1px solid #FDE68A;
+        border-radius: 10px;
+        padding: 15px 17px;
+        margin-top: 9px;
+        font-size: 13px;
+    }
+
+    .budget-info-header {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin-bottom: 11px;
+        font-weight: 600;
+        color: #92400E;
+    }
+
+    .warning-icon {
+        font-size: 17px;
+    }
+
+    .budget-breakdown {
+        display: grid;
+        gap: 7px;
+        color: #78350F;
+        font-size: 13px;
+    }
+
+    .budget-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+    }
+
+    .budget-row.total {
+        border-top: 1px solid #FCD34D;
+        margin-top: 5px;
+        padding-top: 9px;
+        font-weight: 700;
+        color: #92400E;
+        font-size: 13px;
+    }
+
+    .budget-row.available {
+        background: #FEF9C3;
+        padding: 7px 11px;
+        border-radius: 6px;
+        margin-top: 3px;
+        font-weight: 700;
+        color: #854D0E;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 11px;
+        padding-top: 26px;
+        margin-top: 26px;
+        border-top: 1px solid #E5E7EB;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        line-height: 1.6;
+    }
+
+    .btn-primary {
+        background: #00BF62;
+        color: #FFFFFF;
+        flex: 1;
+        box-shadow: 0 4px 12px rgba(0,191,98,0.25);
+    }
+
+    .btn-primary:hover {
+        background: #009951;
+    }
+
+    .btn-secondary {
+        background: #F3F4F6;
+        color: #374151;
+    }
+
+    .btn-secondary:hover {
+        background: #E5E7EB;
+    }
+
+    .messages {
+        margin-bottom: 23px;
+    }
+
+    .alert {
+        padding: 13px 17px;
+        border-radius: 10px;
+        margin-bottom: 11px;
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.6;
+    }
+
+    .alert-error {
+        background: #FEE2E2;
+        color: #991B1B;
+        border: 1px solid #FCA5A5;
+    }
+
+    .alert-success {
+        background: #D1FAE5;
+        color: #065F46;
+        border: 1px solid #6EE7B7;
+    }
+
+    .alert-icon {
+        font-size: 17px;
+    }
+
+    @media (max-width: 768px) {
+        .form-container {
+            padding: 23px 19px;
+        }
+
+        .project-info-banner {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .form-actions {
+            flex-direction: column;
+        }
+
+        .btn-primary {
+            flex: none;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="breadcrumb">
+    <a href="{% url 'project_list' %}">Projects</a>
+    <span class="breadcrumb-separator">›</span>
+    <a href="{% url 'project_detail' project.id %}">{{ project.title }}</a>
+    <span class="breadcrumb-separator">›</span>
+    <span>Add Package</span>
+</div>
+
+<div class="page-header">
+    <h1 class="page-title">Add New Package</h1>
+    <p class="page-subtitle">Create a new package for {{ project.title }}</p>
+</div>
+
+<div class="project-info-banner">
+    <div class="banner-info">
+        <span class="banner-label">Project</span>
+        <span class="banner-value">{{ project.title }}</span>
+    </div>
+    <div class="banner-info">
+        <span class="banner-label">Project Budget</span>
+        <span class="banner-value">£ {{ project.budget|floatformat:0 }}</span>
+    </div>
+    <div class="banner-info">
+        <span class="banner-label">Existing Packages</span>
+        <span class="banner-value">{{ project.package_set.count }}</span>
+    </div>
+</div>
+
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        <span class="alert-icon">
+            {% if message.tags == 'error' %}⚠️{% elif message.tags == 'success' %}✓{% endif %}
+        </span>
+        <span>{{ message }}</span>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="form-container">
+    <h2 class="form-section-title">Package Details</h2>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="{{ form.title.id_for_label }}" class="form-label required">Package Title</label>
+            {{ form.title }}
+            {% if form.title.errors %}
+                {% for error in form.title.errors %}
+                <div class="alert alert-error" style="margin-top: 7px;">
+                    <span class="alert-icon">⚠️</span>
+                    <span>{{ error }}</span>
+                </div>
+                {% endfor %}
+            {% endif %}
+            <p class="form-help">
+                <span class="help-icon">💡</span>
+                Give this package a clear and descriptive title
+            </p>
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.description.id_for_label }}" class="form-label required">Package Description</label>
+            {{ form.description }}
+            {% if form.description.errors %}
+                {% for error in form.description.errors %}
+                <div class="alert alert-error" style="margin-top: 7px;">
+                    <span class="alert-icon">⚠️</span>
+                    <span>{{ error }}</span>
+                </div>
+                {% endfor %}
+            {% endif %}
+            <p class="form-help">
+                <span class="help-icon">💡</span>
+                Provide detailed information to help contractors understand the work involved
+            </p>
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.budget.id_for_label }}" class="form-label required">Package Budget (£)</label>
+            <div class="input-group">
+                <span class="input-prefix">£</span>
+                {{ form.budget }}
+            </div>
+            {% if form.budget.errors %}
+                {% for error in form.budget.errors %}
+                <div class="alert alert-error" style="margin-top: 7px;">
+                    <span class="alert-icon">⚠️</span>
+                    <span>{{ error }}</span>
+                </div>
+                {% endfor %}
+            {% endif %}
+            <div class="budget-info-card">
+                <div class="budget-info-header">
+                    <span class="warning-icon">💰</span>
+                    <span>Budget Allocation Details</span>
+                </div>
+                <div class="budget-breakdown">
+                    <div class="budget-row">
+                        <span>Project Total Budget:</span>
+                        <span><strong>£ {{ project.budget|floatformat:0 }}</strong></span>
+                    </div>
+                    <div class="budget-row">
+                        <span>Already Allocated ({{ allocated_packages_count }} package{{ allocated_packages_count|pluralize }}):</span>
+                        <span><strong>£ {{ allocated_budget|floatformat:0 }}</strong></span>
+                    </div>
+                    <div class="budget-row available">
+                        <span>Available for this Package:</span>
+                        <span><strong>£ {{ remaining_budget|floatformat:0 }}</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                <span>✓</span>
+                <span>Create Package</span>
+            </button>
+            <a href="{% url 'project_detail' project.id %}" class="btn btn-secondary">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}

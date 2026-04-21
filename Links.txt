@@ -1,0 +1,3 @@
+youtube link: https://youtu.be/Dk-QrwfZ1As?si=eicDKEiM1nWeOlQ8
+
+GitHub link: https://github.com/L5-WAT/assignment-2-django-based-web-app-prakristmaharjan.git

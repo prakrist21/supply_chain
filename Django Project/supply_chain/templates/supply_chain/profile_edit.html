@@ -1,0 +1,234 @@
+{% extends 'supply_chain/base.html' %}
+
+{% block title %}Edit Profile - Supply Chain System{% endblock %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+    * {
+        font-family: 'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    }
+
+    .edit-container {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 36px 18px;
+    }
+
+    .edit-header {
+        margin-bottom: 34px;
+    }
+
+    .edit-header h1 {
+        font-size: 28px;
+        font-weight: 800;
+        color: #1A1F2E;
+        margin-bottom: 7px;
+        letter-spacing: -0.5px;
+        line-height: 1.6;
+    }
+
+    .edit-header p {
+        color: #6B7280;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .user-type-badge {
+        display: inline-block;
+        background: #E6F9F0;
+        color: #00BF62;
+        padding: 6px 13px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 9px;
+    }
+
+    .edit-form {
+        background: #FFFFFF;
+        border-radius: 12px;
+        padding: 32px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        border: 1px solid #E5E7EB;
+    }
+
+    .form-group {
+        margin-bottom: 22px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: 600;
+        color: #1A1F2E;
+        margin-bottom: 7px;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 11px 15px;
+        border: 1px solid #E5E7EB;
+        border-radius: 10px;
+        font-size: 14px;
+        transition: all 0.15s ease;
+        font-family: 'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+        line-height: 1.6;
+    }
+
+    .form-input:focus {
+        outline: none;
+        border-color: #00BF62;
+        box-shadow: 0 0 0 3px #E6F9F0;
+    }
+
+    .form-input:hover:not(:focus) {
+        border-color: #D1D5DB;
+    }
+
+    .errorlist {
+        list-style: none;
+        padding: 0;
+        margin: 7px 0 0 0;
+    }
+
+    .errorlist li {
+        color: #EF4444;
+        font-size: 13px;
+        font-weight: 500;
+        padding: 6px 11px;
+        background: #FEF2F2;
+        border-radius: 6px;
+        margin-top: 4px;
+        line-height: 1.6;
+    }
+
+    .form-input.error {
+        border-color: #EF4444;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 13px;
+        margin-top: 30px;
+        padding-top: 23px;
+        border-top: 1px solid #E5E7EB;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 15px;
+        transition: all 0.15s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        border: none;
+        cursor: pointer;
+        font-family: 'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+        line-height: 1.6;
+    }
+
+    .btn-primary {
+        background: #00BF62;
+        color: #FFFFFF;
+        box-shadow: 0 4px 12px rgba(0,191,98,0.25);
+    }
+
+    .btn-primary:hover {
+        background: #009951;
+    }
+
+    .btn-secondary {
+        background: #F3F4F6;
+        color: #374151;
+    }
+
+    .btn-secondary:hover {
+        background: #E5E7EB;
+    }
+
+    .help-text {
+        font-size: 12px;
+        color: #6B7280;
+        margin-top: 5px;
+        font-style: italic;
+        line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+        .edit-form {
+            padding: 23px;
+        }
+
+        .form-actions {
+            flex-direction: column;
+        }
+
+        .btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="edit-container">
+    <div class="edit-header">
+        <h1>Edit Profile</h1>
+        <p>Update your profile information</p>
+        <span class="user-type-badge">{{ user_type }} Account</span>
+    </div>
+
+    <div class="edit-form">
+        <form method="post" novalidate>
+            {% csrf_token %}
+
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <p class="help-text">{{ field.help_text }}</p>
+                    {% endif %}
+                    {% if field.errors %}
+                        <ul class="errorlist">
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            {% if form.non_field_errors %}
+                <ul class="errorlist">
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                    </svg>
+                    Save Changes
+                </button>
+                <a href="{% url 'profile_view' %}" class="btn btn-secondary">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,74 @@
+[
+  {
+    "model": "supply_chain.team",
+    "pk": 1,
+    "fields": {
+      "name": "City Hall Renovation Team",
+      "created_at": "2025-10-08T11:30:00Z",
+      "updated_at": "2025-10-08T11:30:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.team",
+    "pk": 2,
+    "fields": {
+      "name": "Community Park Construction Team",
+      "created_at": "2025-10-11T14:30:00Z",
+      "updated_at": "2025-10-11T14:30:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.team",
+    "pk": 3,
+    "fields": {
+      "name": "Library Extension Project Team",
+      "created_at": "2025-10-14T09:00:00Z",
+      "updated_at": "2025-10-14T09:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.team",
+    "pk": 4,
+    "fields": {
+      "name": "School Sports Facility Team",
+      "created_at": "2025-10-19T10:15:00Z",
+      "updated_at": "2025-10-19T10:15:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.team",
+    "pk": 5,
+    "fields": {
+      "name": "Bridge Maintenance Crew",
+      "created_at": "2025-10-10T13:00:00Z",
+      "updated_at": "2025-10-10T13:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.team",
+    "pk": 6,
+    "fields": {
+      "name": "Town Square Development Team",
+      "created_at": "2025-10-22T11:00:00Z",
+      "updated_at": "2025-10-22T11:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.team",
+    "pk": 7,
+    "fields": {
+      "name": "Community Center Roofing Team",
+      "created_at": "2025-07-28T08:30:00Z",
+      "updated_at": "2025-07-28T08:30:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.team",
+    "pk": 8,
+    "fields": {
+      "name": "Fire Station Modernization Team",
+      "created_at": "2025-10-02T10:00:00Z",
+      "updated_at": "2025-10-02T10:00:00Z"
+    }
+  }
+]

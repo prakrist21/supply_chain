@@ -1,0 +1,114 @@
+[
+  {
+    "model": "supply_chain.contractor",
+    "pk": 1,
+    "fields": {
+      "user": 2,
+      "name": "Ace Builders",
+      "contact_email": "contractor@acebuilders.com",
+      "contact": "1234567890",
+      "experience": 5,
+      "role": "carpenter",
+      "created_at": "2025-10-01T08:00:00Z",
+      "updated_at": "2025-10-01T08:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.contractor",
+    "pk": 2,
+    "fields": {
+      "user": 5,
+      "name": "Prime Contractors",
+      "contact_email": "info@primecontractors.com",
+      "contact": "0987654321",
+      "experience": 8,
+      "role": "painter",
+      "created_at": "2025-10-02T09:00:00Z",
+      "updated_at": "2025-10-02T09:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.contractor",
+    "pk": 3,
+    "fields": {
+      "user": 7,
+      "name": "Alpha Construction",
+      "contact_email": "contact@alphaconstruction.com",
+      "contact": "1122334455",
+      "experience": 10,
+      "role": "electrician",
+      "created_at": "2025-10-05T11:00:00Z",
+      "updated_at": "2025-10-05T11:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.contractor",
+    "pk": 4,
+    "fields": {
+      "user": 8,
+      "name": "Beta Builders",
+      "contact_email": "info@betabuilders.co.uk",
+      "contact": "2233445566",
+      "experience": 6,
+      "role": "plumber",
+      "created_at": "2025-10-08T08:30:00Z",
+      "updated_at": "2025-10-08T08:30:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.contractor",
+    "pk": 5,
+    "fields": {
+      "user": 10,
+      "name": "Gamma Developments",
+      "contact_email": "admin@gammadevelopments.com",
+      "contact": "3344556677",
+      "experience": 12,
+      "role": "mason",
+      "created_at": "2025-10-10T09:15:00Z",
+      "updated_at": "2025-10-10T09:15:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.contractor",
+    "pk": 6,
+    "fields": {
+      "user": 12,
+      "name": "Delta Contractors",
+      "contact_email": "projects@deltacontractors.com",
+      "contact": "4455667788",
+      "experience": 7,
+      "role": "roofer",
+      "created_at": "2025-10-12T10:45:00Z",
+      "updated_at": "2025-10-12T10:45:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.contractor",
+    "pk": 7,
+    "fields": {
+      "user": 13,
+      "name": "Omega Construction",
+      "contact_email": "hello@omegaconstruction.co.uk",
+      "contact": "5566778899",
+      "experience": 15,
+      "role": "carpenter",
+      "created_at": "2025-10-15T08:00:00Z",
+      "updated_at": "2025-10-15T08:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.contractor",
+    "pk": 8,
+    "fields": {
+      "user": 15,
+      "name": "Epsilon Builders",
+      "contact_email": "contact@epsilonbuilders.com",
+      "contact": "6677889900",
+      "experience": 9,
+      "role": "electrician",
+      "created_at": "2025-10-18T09:30:00Z",
+      "updated_at": "2025-10-18T09:30:00Z"
+    }
+  }
+]

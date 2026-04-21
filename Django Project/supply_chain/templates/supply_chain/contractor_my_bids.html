@@ -1,0 +1,419 @@
+{% extends 'supply_chain/base.html' %}
+
+{% block title %}My Bids - Supply Chain System{% endblock %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+    * {
+        font-family: 'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    }
+
+    .page-header {
+        margin-bottom: 27px;
+    }
+
+    .page-title {
+        font-size: 28px;
+        font-weight: 800;
+        color: #1A1F2E;
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
+        line-height: 1.6;
+    }
+
+    .page-subtitle {
+        font-size: 15px;
+        color: #6B7280;
+        font-weight: 400;
+        line-height: 1.6;
+    }
+
+    .stats-section {
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        gap: 18px;
+        margin-bottom: 28px;
+    }
+
+    .stat-card {
+        background: #FFFFFF;
+        border: 1px solid #E5E7EB;
+        border-radius: 12px;
+        padding: 22px;
+        transition: all 0.15s ease;
+    }
+
+    .stat-card:hover {
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .stat-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+        color: #6B7280;
+        margin-bottom: 9px;
+    }
+
+    .stat-value {
+        font-size: 32px;
+        font-weight: 800;
+        color: #1A1F2E;
+        line-height: 1.6;
+    }
+
+    .table-container {
+        background: #FFFFFF;
+        border: 1px solid #E5E7EB;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    thead {
+        background: #F9FAFB;
+        border-bottom: 1px solid #E5E7EB;
+    }
+
+    th {
+        padding: 14px 18px;
+        text-align: left;
+        font-size: 12px;
+        font-weight: 600;
+        color: #4B5563;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        white-space: nowrap;
+    }
+
+    tbody tr {
+        border-bottom: 1px solid #E5E7EB;
+        transition: all 0.15s ease;
+    }
+
+    tbody tr:hover {
+        background: #F9FAFB;
+    }
+
+    tbody tr:last-child {
+        border-bottom: none;
+    }
+
+    td {
+        padding: 16px 18px;
+        font-size: 14px;
+        color: #1A1F2E;
+    }
+
+    .project-cell {
+        color: #6B7280;
+        font-size: 13px;
+    }
+
+    .package-cell {
+        font-weight: 600;
+        color: #1A1F2E;
+    }
+
+    .council-cell {
+        color: #9CA3AF;
+        font-size: 13px;
+        margin-top: 2px;
+    }
+
+    .amount-cell {
+        font-weight: 700;
+        color: #00BF62;
+        font-size: 15px;
+    }
+
+    .budget-cell {
+        color: #6B7280;
+        font-size: 13px;
+    }
+
+    .date-cell {
+        color: #6B7280;
+        font-size: 13px;
+    }
+
+    .status-badge {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .status-pending {
+        background: #FEF3C7;
+        color: #92400E;
+    }
+
+    .status-approved {
+        background: #D1FAE5;
+        color: #065F46;
+    }
+
+    .status-rejected {
+        background: #FEE2E2;
+        color: #991B1B;
+    }
+
+    .btn-view {
+        padding: 7px 13px;
+        background: #00BF62;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        display: inline-block;
+    }
+
+    .btn-view:hover {
+        background: #009951;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 56px 18px;
+        background: #F9FAFB;
+        border-radius: 12px;
+        border: 1px solid #E5E7EB;
+    }
+
+    .empty-icon {
+        font-size: 48px;
+        margin-bottom: 18px;
+        opacity: 0.5;
+    }
+
+    .empty-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1A1F2E;
+        margin-bottom: 9px;
+        line-height: 1.6;
+    }
+
+    .empty-text {
+        font-size: 14px;
+        color: #6B7280;
+        line-height: 1.6;
+        margin-bottom: 22px;
+    }
+
+    .btn-browse {
+        display: inline-block;
+        padding: 12px 24px;
+        background: #00BF62;
+        color: #FFFFFF;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.15s ease;
+        box-shadow: 0 4px 12px rgba(0,191,98,0.25);
+    }
+
+    .btn-browse:hover {
+        background: #009951;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin-top: 36px;
+        padding: 22px;
+    }
+
+    .pagination-btn {
+        padding: 11px 17px;
+        background: #FFFFFF;
+        color: #00BF62;
+        border: 1px solid #E5E7EB;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.15s ease;
+        line-height: 1.6;
+    }
+
+    .pagination-btn:hover {
+        background: #E6F9F0;
+        border-color: #00BF62;
+    }
+
+    .pagination-btn.active {
+        background: #00BF62;
+        color: #FFFFFF;
+        border-color: #00BF62;
+    }
+
+    .pagination-btn.disabled {
+        background: #F9FAFB;
+        color: #D1D5DB;
+        border-color: #E5E7EB;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
+    .pagination-info {
+        color: #6B7280;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.6;
+        margin-left: 8px;
+    }
+
+    @media (max-width: 768px) {
+        .stats-section {
+            grid-template-columns: repeat(2,1fr);
+        }
+
+        .table-container {
+            border-radius: 10px;
+        }
+
+        th,td {
+            padding: 11px 9px;
+            font-size: 12px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">My Bids</h1>
+    <p class="page-subtitle">Track and manage all your submitted bids</p>
+</div>
+
+<div class="stats-section">
+    <div class="stat-card">
+        <div class="stat-label">Total Bids</div>
+        <div class="stat-value">{{ total_bids }}</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-label">Pending</div>
+        <div class="stat-value">{{ pending_bids }}</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-label">Approved</div>
+        <div class="stat-value">{{ approved_bids }}</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-label">Rejected</div>
+        <div class="stat-value">{{ rejected_bids }}</div>
+    </div>
+</div>
+
+{% if page_obj %}
+<div class="table-container">
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Project</th>
+                    <th>Package</th>
+                    <th>Your Bid</th>
+                    <th>Budget</th>
+                    <th>Submitted</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bid in page_obj %}
+                <tr>
+                    <td>
+                        <div class="package-cell">{{ bid.package.project.title }}</div>
+                        <div class="council-cell">{{ bid.package.project.council.name }}</div>
+                    </td>
+                    <td>
+                        <div class="package-cell">{{ bid.package.title }}</div>
+                    </td>
+                    <td>
+                        <div class="amount-cell">£ {{ bid.amount|floatformat:0 }}</div>
+                    </td>
+                    <td>
+                        <div class="budget-cell">£ {{ bid.package.budget|floatformat:0 }}</div>
+                    </td>
+                    <td>
+                        <div class="date-cell">{{ bid.date|date:"M d, Y" }}</div>
+                    </td>
+                    <td>
+                        <span class="status-badge status-{{ bid.status }}">{{ bid.get_status_display }}</span>
+                    </td>
+                    <td>
+                        <a href="{% url 'package_detail' package_id=bid.package.id %}" class="btn-view">View</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% if page_obj.has_other_pages %}
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?page=1" class="pagination-btn">«</a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="pagination-btn">‹</a>
+    {% else %}
+        <span class="pagination-btn disabled">«</span>
+        <span class="pagination-btn disabled">‹</span>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+            <span class="pagination-btn active">{{ num }}</span>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a href="?page={{ num }}" class="pagination-btn">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="pagination-btn">›</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}" class="pagination-btn">»</a>
+    {% else %}
+        <span class="pagination-btn disabled">›</span>
+        <span class="pagination-btn disabled">»</span>
+    {% endif %}
+
+    <span class="pagination-info">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+</div>
+{% endif %}
+
+{% else %}
+<div class="empty-state">
+    <div class="empty-icon">—</div>
+    <h3 class="empty-title">No Bids Yet</h3>
+    <p class="empty-text">
+        You haven't submitted any bids yet. Browse open projects to get started!
+    </p>
+    <a href="{% url 'open_projects' %}" class="btn-browse">Browse Projects</a>
+</div>
+{% endif %}
+{% endblock %}

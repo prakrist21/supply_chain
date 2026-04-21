@@ -1,0 +1,275 @@
+{% extends 'supply_chain/base.html' %}
+
+{% block title %}Create New Project - Supply Chain System{% endblock %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+    * {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .page-header {
+        margin-bottom: 32px;
+    }
+
+    .page-header h1 {
+        font-size: 36px;
+        font-weight: 800;
+        color: #1A1F2E;
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
+        line-height: 1.6;
+    }
+
+    .page-header p {
+        color: #6B7280;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .form-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: #FFFFFF;
+        border-radius: 12px;
+        padding: 32px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        border: 1px solid #E5E7EB;
+    }
+
+    .form-group {
+        margin-bottom: 24px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: 600;
+        color: #1A1F2E;
+        margin-bottom: 8px;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .form-group label .required {
+        color: #EF4444;
+        margin-left: 4px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="number"],
+    .form-group input[type="date"],
+    .form-group textarea {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid #E5E7EB;
+        border-radius: 10px;
+        font-size: 14px;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        transition: all 0.15s ease;
+        line-height: 1.6;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #00BF62;
+        box-shadow: 0 0 0 3px #E6F9F0;
+    }
+
+    .form-group textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    .form-group small {
+        display: block;
+        color: #6B7280;
+        font-size: 12px;
+        margin-top: 8px;
+        line-height: 1.6;
+    }
+
+    .date-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid #E5E7EB;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        line-height: 1.6;
+    }
+
+    .btn-primary {
+        background: #00BF62;
+        color: #FFFFFF;
+        box-shadow: 0 4px 12px rgba(0, 191, 98, 0.25);
+    }
+
+    .btn-primary:hover {
+        background: #009951;
+    }
+
+    .btn-secondary {
+        background: #F3F4F6;
+        color: #374151;
+    }
+
+    .btn-secondary:hover {
+        background: #E5E7EB;
+    }
+
+    .alert {
+        padding: 16px 20px;
+        border-radius: 10px;
+        margin-bottom: 24px;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .alert-error {
+        background: #FEE2E2;
+        color: #991B1B;
+        border-left: 4px solid #EF4444;
+    }
+
+    .alert-success {
+        background: #D1FAE5;
+        color: #065F46;
+        border-left: 4px solid #00BF62;
+    }
+
+    @media (max-width: 768px) {
+        .form-container {
+            padding: 24px;
+        }
+
+        .date-row {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Create New Project</h1>
+    <p>Fill in the details below to create a new project for contractors to bid on.</p>
+</div>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<div class="form-container">
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="title">
+                Project Title
+                <span class="required">*</span>
+            </label>
+            <input
+                type="text"
+                id="title"
+                name="title"
+                required
+                placeholder="Enter project title"
+                value="{{ request.POST.title }}"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="description">
+                Project Description
+                <span class="required">*</span>
+            </label>
+            <textarea
+                id="description"
+                name="description"
+                required
+                placeholder="Describe the project scope, requirements, and objectives..."
+            >{{ request.POST.description }}</textarea>
+            <small>Provide detailed information about what the project entails.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="budget">
+                Total Budget (£)
+                <span class="required">*</span>
+            </label>
+            <input
+                type="number"
+                id="budget"
+                name="budget"
+                required
+                min="1"
+                step="1"
+                placeholder="Enter total budget"
+                value="{{ request.POST.budget }}"
+            >
+            <small>This will be divided into packages for contractors to bid on.</small>
+        </div>
+
+        <div class="date-row">
+            <div class="form-group">
+                <label for="start_date">
+                    Start Date
+                    <span class="required">*</span>
+                </label>
+                <input
+                    type="date"
+                    id="start_date"
+                    name="start_date"
+                    required
+                    min="{{ today }}"
+                    value="{{ request.POST.start_date }}"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="end_date">
+                    End Date
+                    <span class="required">*</span>
+                </label>
+                <input
+                    type="date"
+                    id="end_date"
+                    name="end_date"
+                    required
+                    min="{{ today }}"
+                    value="{{ request.POST.end_date }}"
+                >
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Create Project</button>
+            <a href="{% url 'project_list' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

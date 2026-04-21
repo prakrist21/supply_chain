@@ -1,0 +1,663 @@
+{% extends 'supply_chain/base.html' %}
+
+{% block title %}{{ package.name }} - Package Details{% endblock %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+    * {
+        font-family: 'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    }
+
+    .page-header {
+        margin-bottom: 26px;
+        padding-bottom: 18px;
+        border-bottom: 1px solid #E5E7EB;
+    }
+
+    .breadcrumb {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 13px;
+        font-size: 14px;
+        color: #6B7280;
+    }
+
+    .breadcrumb a {
+        color: #00BF62;
+        text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+        text-decoration: underline;
+    }
+
+    .page-title {
+        font-size: 28px;
+        font-weight: 800;
+        color: #1A1F2E;
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
+        line-height: 1.6;
+    }
+
+    .page-subtitle {
+        font-size: 15px;
+        color: #6B7280;
+        line-height: 1.6;
+    }
+
+    .main-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 23px;
+    }
+
+    .card {
+        background: #FFFFFF;
+        border: 1px solid #E5E7EB;
+        border-radius: 12px;
+        padding: 23px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+        padding-bottom: 13px;
+        border-bottom: 1px solid #E5E7EB;
+    }
+
+    .card-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: #1A1F2E;
+        line-height: 1.6;
+    }
+
+    .card-actions {
+        display: flex;
+        gap: 9px;
+    }
+
+    .project-info-section {
+        background: #F9FAFB;
+        padding: 18px;
+        border-radius: 10px;
+        margin-bottom: 18px;
+    }
+
+    .project-title {
+        font-size: 17px;
+        font-weight: 700;
+        color: #1A1F2E;
+        margin-bottom: 9px;
+        line-height: 1.6;
+    }
+
+    .project-description {
+        color: #6B7280;
+        line-height: 1.6;
+        font-size: 14px;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        gap: 18px;
+        margin-bottom: 18px;
+    }
+
+    .info-item {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .info-label {
+        font-size: 12px;
+        color: #6B7280;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    .info-value {
+        font-size: 17px;
+        font-weight: 700;
+        color: #1A1F2E;
+        line-height: 1.6;
+    }
+
+    .info-value.budget {
+        color: #00BF62;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        gap: 13px;
+        padding: 18px;
+        background: #F9FAFB;
+        border-radius: 10px;
+        border: 1px solid #E5E7EB;
+    }
+
+    .stat-item {
+        text-align: center;
+    }
+
+    .stat-label {
+        font-size: 12px;
+        color: #6B7280;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 7px;
+        font-weight: 600;
+    }
+
+    .stat-value {
+        font-size: 24px;
+        font-weight: 800;
+        color: #1A1F2E;
+        line-height: 1.6;
+    }
+
+    .description-text {
+        color: #4B5563;
+        line-height: 1.6;
+        font-size: 14px;
+    }
+
+    .status-badge {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .status-pending {
+        background: #FEF3C7;
+        color: #92400E;
+    }
+
+    .status-approved {
+        background: #D1FAE5;
+        color: #065F46;
+    }
+
+    .status-rejected {
+        background: #FEE2E2;
+        color: #991B1B;
+    }
+
+    .bids-section {
+        margin-top: 9px;
+    }
+
+    .bid-card {
+        background: #F9FAFB;
+        border: 1px solid #E5E7EB;
+        border-radius: 10px;
+        padding: 18px;
+        margin-bottom: 13px;
+        transition: all 0.15s ease;
+    }
+
+    .bid-card:hover {
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .bid-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 13px;
+    }
+
+    .contractor-name {
+        font-size: 16px;
+        font-weight: 700;
+        color: #1A1F2E;
+        line-height: 1.6;
+    }
+
+    .bid-details {
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        gap: 13px;
+        margin-bottom: 13px;
+    }
+
+    .bid-actions {
+        display: flex;
+        gap: 9px;
+        margin-top: 13px;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+        transition: all 0.15s ease;
+        display: inline-block;
+        line-height: 1.6;
+    }
+
+    .btn-primary {
+        background: #00BF62;
+        color: #FFFFFF;
+        box-shadow: 0 4px 12px rgba(0,191,98,0.25);
+    }
+
+    .btn-primary:hover {
+        background: #009951;
+    }
+
+    .btn-success {
+        background: #00BF62;
+        color: #FFFFFF;
+    }
+
+    .btn-success:hover {
+        background: #009951;
+    }
+
+    .btn-danger {
+        background: #EF4444;
+        color: #FFFFFF;
+    }
+
+    .btn-danger:hover {
+        background: #DC2626;
+    }
+
+    .btn-secondary {
+        background: #F3F4F6;
+        color: #374151;
+    }
+
+    .btn-secondary:hover {
+        background: #E5E7EB;
+    }
+
+    .alert {
+        padding: 14px 18px;
+        border-radius: 10px;
+        margin-bottom: 18px;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .alert-info {
+        background: #DBEAFE;
+        color: #1E40AF;
+        border: 1px solid #93C5FD;
+    }
+
+    .alert-warning {
+        background: #FEF3C7;
+        color: #92400E;
+        border: 1px solid #FDE68A;
+    }
+
+    .alert-success {
+        background: #D1FAE5;
+        color: #065F46;
+        border: 1px solid #6EE7B7;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 38px 18px;
+        background: #F9FAFB;
+        border-radius: 10px;
+        color: #6B7280;
+        line-height: 1.6;
+    }
+
+    .expiration-warning {
+        background: #EF4444;
+        color: #FFFFFF;
+        padding: 17px 23px;
+        border-radius: 10px;
+        margin-bottom: 18px;
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        box-shadow: 0 4px 12px rgba(239,68,68,0.25);
+    }
+
+    .expiration-warning.soon {
+        background: #F59E0B;
+    }
+
+    .expiration-warning-icon {
+        font-size: 26px;
+    }
+
+    .expiration-warning-text {
+        flex: 1;
+    }
+
+    .expiration-warning-title {
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 3px;
+        line-height: 1.6;
+    }
+
+    .expiration-warning-subtitle {
+        font-size: 13px;
+        opacity: 0.95;
+        line-height: 1.6;
+    }
+
+    .btn.disabled {
+        background: #D1D5DB !important;
+        color: #9CA3AF !important;
+        cursor: not-allowed;
+        pointer-events: none;
+        box-shadow: none !important;
+    }
+
+    @media (max-width: 768px) {
+        .info-grid,
+        .stats-grid,
+        .bid-details {
+            grid-template-columns: repeat(2,1fr);
+        }
+
+        .card-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 13px;
+        }
+
+        .card-actions {
+            width: 100%;
+        }
+
+        .card-actions .btn {
+            flex: 1;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="breadcrumb">
+       {% if is_council %}
+            <a href="{% url 'project_list' %}">Projects</a>
+        {% elif is_contractor %}
+            <a href="{% url 'open_projects' %}">Projects</a>
+        {% endif %}
+        <span>/</span>
+        {% if is_council %}
+            <a href="{% url 'project_detail' project.id %}">{{ project.title }}</a>
+        {% elif is_contractor %}
+            <a href="{% url 'contractor_project_detail' project.id %}">{{ project.title }}</a>
+        {% endif %}
+        <span>/</span>
+        <span>{{ package.name }}</span>
+    </div>
+    <h1 class="page-title">{{ package.title }}</h1>
+    <p class="page-subtitle">Package Details & Management</p>
+</div>
+
+{% load tz %}
+{% now "Y-m-d" as today %}
+{% if project.end_date|date:"Y-m-d" < today %}
+<div class="expiration-warning">
+   <div class="expiration-warning-icon">🔒</div>
+   <div class="expiration-warning-text">
+       <div class="expiration-warning-title">Project Has Ended</div>
+       <div class="expiration-warning-subtitle">
+           This project ended on {{ project.end_date|date:"F d, Y" }}. No new bids can be placed.
+       </div>
+   </div>
+</div>
+{% endif %}
+
+<div class="main-content">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Package Information</h2>
+            {% if is_council and is_owner %}
+            <div class="card-actions">
+                <form method="POST" action="{% url 'package_delete' package_id=package.id %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this package?');">Delete Package</button>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="project-info-section">
+            <div class="project-title">{{ project.title }}</div>
+            <p class="project-description">{{ project.description|truncatewords:50 }}</p>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-item">
+                <span class="info-label">Package Budget</span>
+                <span class="info-value budget">£ {{ package.budget|floatformat:0 }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Deadline</span>
+                <span class="info-value">{{ package.deadline|date:"M d, Y" }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Project Budget</span>
+                <span class="info-value budget">£ {{ project.budget|floatformat:0 }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Project End Date</span>
+                <span class="info-value">{{ project.end_date|date:"M d, Y" }}</span>
+            </div>
+        </div>
+
+        {% if is_council %}
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-label">Total Bids</div>
+                <div class="stat-value">{{ total_bids }}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Pending</div>
+                <div class="stat-value">{{ pending_bids }}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Approved</div>
+                <div class="stat-value">{{ approved_bids }}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Rejected</div>
+                <div class="stat-value">{{ rejected_bids }}</div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">Package Description</h2>
+        <p class="description-text">{{ package.description }}</p>
+    </div>
+
+    {% if is_council %}
+        <div class="card">
+            <h2 class="card-title">Submitted Bids ({{ total_bids }})</h2>
+
+            {% if has_approved_bid %}
+                <div class="alert alert-success">
+                    ✓ This package has an approved bid and is now closed for new submissions.
+                </div>
+            {% endif %}
+
+            {% if bids %}
+                <div class="bids-section">
+                    {% for bid in bids %}
+                    <div class="bid-card">
+                        <div class="bid-header">
+                            <span class="contractor-name">{{ bid.contractor.name }}</span>
+                            <span class="status-badge status-{{ bid.status }}">{{ bid.status }}</span>
+                        </div>
+
+                        <div class="bid-details">
+                            <div class="info-item">
+                                <span class="info-label">Bid Amount</span>
+                                <span class="info-value budget">£ {{ bid.amount|floatformat:0 }}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Submitted</span>
+                                <span class="info-value" style="font-size: 14px;">{{ bid.date|date:"M d, Y" }}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Contact</span>
+                                <span class="info-value" style="font-size: 14px;">{{ bid.contractor.user.email }}</span>
+                            </div>
+                        </div>
+
+                        {% if bid.document1 or bid.document2 or bid.document3 %}
+                        <div class="info-item" style="margin-top: 13px;padding-top: 13px;border-top: 1px solid #E5E7EB;">
+                            <span class="info-label">Attached Documents</span>
+                            <div style="display: flex;flex-wrap: wrap;gap: 9px;margin-top: 9px;">
+                                {% if bid.document1 %}
+                                <a href="{{ bid.document1.url }}" download class="btn btn-secondary" style="font-size: 13px;padding: 7px 14px;">
+                                    📎 Document 1
+                                </a>
+                                {% endif %}
+                                {% if bid.document2 %}
+                                <a href="{{ bid.document2.url }}" download class="btn btn-secondary" style="font-size: 13px;padding: 7px 14px;">
+                                    📎 Document 2
+                                </a>
+                                {% endif %}
+                                {% if bid.document3 %}
+                                <a href="{{ bid.document3.url }}" download class="btn btn-secondary" style="font-size: 13px;padding: 7px 14px;">
+                                    📎 Document 3
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if bid.proposal %}
+                        <div class="info-item">
+                            <span class="info-label">Proposal</span>
+                            <p class="description-text">{{ bid.proposal }}</p>
+                        </div>
+                        {% endif %}
+
+                        {% if is_owner and bid.status == 'pending' %}
+                        <div class="bid-actions">
+                            <form method="POST" action="{% url 'bid_approve' bid_id=bid.id %}" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-success">Approve Bid</button>
+                            </form>
+                            <form method="POST" action="{% url 'bid_reject' bid_id=bid.id %}" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Reject Bid</button>
+                            </form>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <p>No bids have been submitted for this package yet.</p>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {% if is_contractor %}
+        <div class="card">
+            <h2 class="card-title">Your Bid Status</h2>
+
+            {% if package_closed %}
+                <div class="alert alert-warning">
+                    ⚠️ This package is closed. A bid has already been approved.
+                </div>
+            {% endif %}
+
+            {% if my_bid %}
+                <div class="bid-card">
+                    <div class="bid-header">
+                        <span class="contractor-name">Your Bid</span>
+                        <span class="status-badge status-{{ my_bid.status }}">{{ my_bid.status }}</span>
+                    </div>
+
+                    <div class="bid-details">
+                        <div class="info-item">
+                            <span class="info-label">Bid Amount</span>
+                            <span class="info-value budget">£ {{ my_bid.amount|floatformat:0 }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Submitted</span>
+                            <span class="info-value" style="font-size: 14px;">{{ my_bid.date|date:"M d, Y" }}</span>
+                        </div>
+                    </div>
+
+                    {% if my_bid.document1 or my_bid.document2 or my_bid.document3 %}
+                    <div class="info-item" style="margin-top: 13px;padding-top: 13px;border-top: 1px solid #E5E7EB;">
+                        <span class="info-label">Your Attached Documents</span>
+                        <div style="display: flex;flex-wrap: wrap;gap: 9px;margin-top: 9px;">
+                            {% if my_bid.document1 %}
+                            <a href="{{ my_bid.document1.url }}" target="_blank" class="btn btn-secondary" style="font-size: 13px;padding: 7px 14px;">
+                                📎 Document 1
+                            </a>
+                            {% endif %}
+                            {% if my_bid.document2 %}
+                            <a href="{{ my_bid.document2.url }}" target="_blank" class="btn btn-secondary" style="font-size: 13px;padding: 7px 14px;">
+                                📎 Document 2
+                            </a>
+                            {% endif %}
+                            {% if my_bid.document3 %}
+                            <a href="{{ my_bid.document3.url }}" target="_blank" class="btn btn-secondary" style="font-size: 13px;padding: 7px 14px;">
+                                📎 Document 3
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if my_bid.proposal %}
+                    <div class="info-item">
+                        <span class="info-label">Your Proposal</span>
+                        <p class="description-text">{{ my_bid.proposal }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            {% else %}
+                {% if not package_closed %}
+                   {% if project.end_date|date:"Y-m-d" < today %}
+                       <div class="alert alert-warning">
+                           This project has ended. No new bids can be submitted.
+                       </div>
+                       <button class="btn btn-primary disabled">Submit Bid (Project Ended)</button>
+                   {% else %}
+                       <div class="alert alert-info">
+                           You haven't submitted a bid for this package yet.
+                       </div>
+                       <a href="{% url 'bid_create' package.id %}" class="btn btn-primary">Submit Bid</a>
+                   {% endif %}
+                {% endif %}
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

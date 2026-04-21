@@ -1,0 +1,7 @@
+{% if not councils %}
+    There are no councils in the database.
+{% else %}
+    {% for council in councils %}
+        {{ council.name }} <br/>
+    {% endfor %}
+{% endif %}

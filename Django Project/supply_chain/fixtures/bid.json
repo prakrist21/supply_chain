@@ -1,0 +1,452 @@
+[
+  {
+    "model": "supply_chain.bid",
+    "pk": 1,
+    "fields": {
+      "amount": 48000,
+      "status": "approved",
+      "project": 1,
+      "contractor": 1,
+      "package": 1,
+      "council": 1,
+      "date": "2025-10-06",
+      "created_at": "2025-10-06T10:00:00Z",
+      "updated_at": "2025-10-08T14:00:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 2,
+    "fields": {
+      "amount": 78000,
+      "status": "approved",
+      "project": 1,
+      "contractor": 1,
+      "package": 2,
+      "council": 1,
+      "date": "2025-10-06",
+      "created_at": "2025-10-06T10:15:00Z",
+      "updated_at": "2025-10-09T11:00:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 3,
+    "fields": {
+      "amount": 62000,
+      "status": "pending",
+      "project": 1,
+      "contractor": 1,
+      "package": 3,
+      "council": 1,
+      "date": "2025-10-07",
+      "created_at": "2025-10-07T09:30:00Z",
+      "updated_at": "2025-10-07T09:30:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 4,
+    "fields": {
+      "amount": 68000,
+      "status": "pending",
+      "project": 1,
+      "contractor": 3,
+      "package": 3,
+      "council": 1,
+      "date": "2025-10-07",
+      "created_at": "2025-10-07T11:00:00Z",
+      "updated_at": "2025-10-07T11:00:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 5,
+    "fields": {
+      "amount": 9500,
+      "status": "approved",
+      "project": 2,
+      "contractor": 2,
+      "package": 4,
+      "council": 2,
+      "date": "2025-10-07",
+      "created_at": "2025-10-07T11:00:00Z",
+      "updated_at": "2025-10-10T10:00:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 6,
+    "fields": {
+      "amount": 43000,
+      "status": "pending",
+      "project": 2,
+      "contractor": 1,
+      "package": 5,
+      "council": 2,
+      "date": "2025-10-08",
+      "created_at": "2025-10-08T08:30:00Z",
+      "updated_at": "2025-10-08T08:30:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 7,
+    "fields": {
+      "amount": 33000,
+      "status": "pending",
+      "project": 2,
+      "contractor": 1,
+      "package": 6,
+      "council": 2,
+      "date": "2025-10-08",
+      "created_at": "2025-10-08T09:00:00Z",
+      "updated_at": "2025-10-08T09:00:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 8,
+    "fields": {
+      "amount": 115000,
+      "status": "approved",
+      "project": 3,
+      "contractor": 1,
+      "package": 7,
+      "council": 1,
+      "date": "2025-10-12",
+      "created_at": "2025-10-12T10:00:00Z",
+      "updated_at": "2025-10-14T15:00:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 9,
+    "fields": {
+      "amount": 125000,
+      "status": "pending",
+      "project": 3,
+      "contractor": 7,
+      "package": 7,
+      "council": 1,
+      "date": "2025-10-12",
+      "created_at": "2025-10-12T11:30:00Z",
+      "updated_at": "2025-10-12T11:30:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 10,
+    "fields": {
+      "amount": 53000,
+      "status": "pending",
+      "project": 3,
+      "contractor": 1,
+      "package": 8,
+      "council": 1,
+      "date": "2025-10-13",
+      "created_at": "2025-10-13T09:00:00Z",
+      "updated_at": "2025-10-13T09:00:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 11,
+    "fields": {
+      "amount": 38000,
+      "status": "approved",
+      "project": 3,
+      "contractor": 3,
+      "package": 9,
+      "council": 1,
+      "date": "2025-10-13",
+      "created_at": "2025-10-13T10:00:00Z",
+      "updated_at": "2025-10-15T12:00:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 12,
+    "fields": {
+      "amount": 175000,
+      "status": "pending",
+      "project": 4,
+      "contractor": 1,
+      "package": 10,
+      "council": 1,
+      "date": "2025-10-16",
+      "created_at": "2025-10-16T08:00:00Z",
+      "updated_at": "2025-10-16T08:00:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 13,
+    "fields": {
+      "amount": 182000,
+      "status": "pending",
+      "project": 4,
+      "contractor": 5,
+      "package": 10,
+      "council": 1,
+      "date": "2025-10-16",
+      "created_at": "2025-10-16T09:30:00Z",
+      "updated_at": "2025-10-16T09:30:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 14,
+    "fields": {
+      "amount": 72000,
+      "status": "pending",
+      "project": 4,
+      "contractor": 1,
+      "package": 11,
+      "council": 1,
+      "date": "2025-10-17",
+      "created_at": "2025-10-17T10:00:00Z",
+      "updated_at": "2025-10-17T10:00:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 15,
+    "fields": {
+      "amount": 58000,
+      "status": "approved",
+      "project": 4,
+      "contractor": 4,
+      "package": 12,
+      "council": 1,
+      "date": "2025-10-17",
+      "created_at": "2025-10-17T11:00:00Z",
+      "updated_at": "2025-10-19T14:00:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 16,
+    "fields": {
+      "amount": 92000,
+      "status": "pending",
+      "project": 5,
+      "contractor": 5,
+      "package": 13,
+      "council": 3,
+      "date": "2025-10-10",
+      "created_at": "2025-10-10T09:00:00Z",
+      "updated_at": "2025-10-10T09:00:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 17,
+    "fields": {
+      "amount": 33000,
+      "status": "pending",
+      "project": 5,
+      "contractor": 1,
+      "package": 14,
+      "council": 3,
+      "date": "2025-10-10",
+      "created_at": "2025-10-10T10:00:00Z",
+      "updated_at": "2025-10-10T10:00:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 18,
+    "fields": {
+      "amount": 135000,
+      "status": "pending",
+      "project": 6,
+      "contractor": 1,
+      "package": 15,
+      "council": 1,
+      "date": "2025-10-22",
+      "created_at": "2025-10-22T09:00:00Z",
+      "updated_at": "2025-10-22T09:00:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 19,
+    "fields": {
+      "amount": 42000,
+      "status": "pending",
+      "project": 6,
+      "contractor": 1,
+      "package": 16,
+      "council": 1,
+      "date": "2025-10-22",
+      "created_at": "2025-10-22T09:30:00Z",
+      "updated_at": "2025-10-22T09:30:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 20,
+    "fields": {
+      "amount": 52000,
+      "status": "approved",
+      "project": 7,
+      "contractor": 6,
+      "package": 18,
+      "council": 4,
+      "date": "2025-07-26",
+      "created_at": "2025-07-26T08:00:00Z",
+      "updated_at": "2025-07-28T10:00:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 21,
+    "fields": {
+      "amount": 23000,
+      "status": "approved",
+      "project": 7,
+      "contractor": 1,
+      "package": 19,
+      "council": 4,
+      "date": "2025-07-26",
+      "created_at": "2025-07-26T09:00:00Z",
+      "updated_at": "2025-07-28T10:30:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 22,
+    "fields": {
+      "amount": 83000,
+      "status": "pending",
+      "project": 8,
+      "contractor": 1,
+      "package": 20,
+      "council": 1,
+      "date": "2025-09-30",
+      "created_at": "2025-09-30T10:00:00Z",
+      "updated_at": "2025-09-30T10:00:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 23,
+    "fields": {
+      "amount": 118000,
+      "status": "approved",
+      "project": 8,
+      "contractor": 1,
+      "package": 21,
+      "council": 1,
+      "date": "2025-09-30",
+      "created_at": "2025-09-30T10:30:00Z",
+      "updated_at": "2025-10-02T14:00:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 24,
+    "fields": {
+      "amount": 92000,
+      "status": "pending",
+      "project": 8,
+      "contractor": 1,
+      "package": 22,
+      "council": 1,
+      "date": "2025-09-30",
+      "created_at": "2025-09-30T11:00:00Z",
+      "updated_at": "2025-09-30T11:00:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  },
+  {
+    "model": "supply_chain.bid",
+    "pk": 25,
+    "fields": {
+      "amount": 95000,
+      "status": "pending",
+      "project": 8,
+      "contractor": 7,
+      "package": 22,
+      "council": 1,
+      "date": "2025-10-01",
+      "created_at": "2025-10-01T09:00:00Z",
+      "updated_at": "2025-10-01T09:00:00Z",
+      "document1": "",
+      "document2": "",
+      "document3": ""
+    }
+  }
+]

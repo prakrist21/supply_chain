@@ -1,0 +1,122 @@
+[
+  {
+    "model": "supply_chain.project",
+    "pk": 1,
+    "fields": {
+      "title": "City Hall Renovation",
+      "council": 1,
+      "description": "Renovation of the city hall.",
+      "budget": 500000,
+      "status": "active",
+      "start_date": "2025-10-10",
+      "end_date": "2026-01-10",
+      "created_at": "2025-10-01T10:00:00Z",
+      "updated_at": "2025-10-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.project",
+    "pk": 2,
+    "fields": {
+      "title": "Community Park Construction",
+      "council": 2,
+      "description": "New park for local community.",
+      "budget": 200000,
+      "status": "active",
+      "start_date": "2025-11-01",
+      "end_date": "2026-02-01",
+      "created_at": "2025-10-05T11:00:00Z",
+      "updated_at": "2025-10-05T11:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.project",
+    "pk": 3,
+    "fields": {
+      "title": "Library Extension Project",
+      "description": "Extension to the existing public library to add computer lab, study rooms, and children's reading area.",
+      "budget": 350000,
+      "council": 1,
+      "status": "active",
+      "start_date": "2025-12-01",
+      "end_date": "2026-03-15",
+      "created_at": "2025-10-10T14:00:00Z",
+      "updated_at": "2025-10-10T14:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.project",
+    "pk": 4,
+    "fields": {
+      "title": "School Sports Facility Upgrade",
+      "description": "Complete overhaul of primary school sports facilities including new gymnasium, outdoor courts, and changing rooms.",
+      "budget": 450000,
+      "council": 1,
+      "status": "active",
+      "start_date": "2025-11-15",
+      "end_date": "2026-04-30",
+      "created_at": "2025-10-15T09:00:00Z",
+      "updated_at": "2025-10-15T09:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.project",
+    "pk": 5,
+    "fields": {
+      "title": "Bridge Maintenance and Repair",
+      "description": "Structural repairs and safety improvements to the historic town bridge.",
+      "budget": 180000,
+      "council": 3,
+      "status": "active",
+      "start_date": "2025-10-20",
+      "end_date": "2026-01-20",
+      "created_at": "2025-10-08T12:00:00Z",
+      "updated_at": "2025-10-08T12:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.project",
+    "pk": 6,
+    "fields": {
+      "title": "Town Square Pedestrianization",
+      "description": "Transform town square into pedestrian-only zone with new paving, seating, and landscaping.",
+      "budget": 320000,
+      "council": 1,
+      "status": "planning",
+      "start_date": "2026-02-01",
+      "end_date": "2026-06-30",
+      "created_at": "2025-10-20T10:30:00Z",
+      "updated_at": "2025-10-20T10:30:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.project",
+    "pk": 7,
+    "fields": {
+      "title": "Community Center Roof Replacement",
+      "description": "Full roof replacement and insulation upgrade for the community center.",
+      "budget": 95000,
+      "council": 4,
+      "status": "completed",
+      "start_date": "2025-08-01",
+      "end_date": "2025-10-15",
+      "created_at": "2025-07-25T14:00:00Z",
+      "updated_at": "2025-10-15T16:30:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.project",
+    "pk": 8,
+    "fields": {
+      "title": "Fire Station Modernization",
+      "description": "Modernize fire station facilities including new equipment storage, training area, and living quarters.",
+      "budget": 580000,
+      "council": 1,
+      "status": "active",
+      "start_date": "2025-10-01",
+      "end_date": "2026-05-31",
+      "created_at": "2025-09-28T11:00:00Z",
+      "updated_at": "2025-09-28T11:00:00Z"
+    }
+  }
+]

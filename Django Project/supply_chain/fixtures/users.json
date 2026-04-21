@@ -1,0 +1,227 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "username": "council1",
+      "password": "pbkdf2_sha256$1000000$INpRPTUVYnydHTTPSn170t$6fGrRf/KqZdCHSDPww48vM80s/BxogwtJ5ni1kOZ8I8=",
+      "email": "council@poppleton.gov.uk",
+      "first_name": "Robert",
+      "last_name": "Wilson",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "date_joined": "2025-09-15T09:00:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "username": "contractor1",
+      "password": "pbkdf2_sha256$1000000$INpRPTUVYnydHTTPSn170t$6fGrRf/KqZdCHSDPww48vM80s/BxogwtJ5ni1kOZ8I8=",
+      "email": "contractor@acebuilders.com",
+      "first_name": "John",
+      "last_name": "Ace",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "date_joined": "2025-10-01T08:00:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+      "username": "admin",
+      "password": "pbkdf2_sha256$1000000$INpRPTUVYnydHTTPSn170t$6fGrRf/KqZdCHSDPww48vM80s/BxogwtJ5ni1kOZ8I8=",
+      "email": "admin@supplychain.com",
+      "first_name": "Admin",
+      "last_name": "User",
+      "is_staff": true,
+      "is_active": true,
+      "is_superuser": true,
+      "date_joined": "2025-09-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 4,
+    "fields": {
+      "username": "huddersfield_council",
+      "password": "pbkdf2_sha256$1000000$INpRPTUVYnydHTTPSn170t$6fGrRf/KqZdCHSDPww48vM80s/BxogwtJ5ni1kOZ8I8=",
+      "email": "d.digger@huddersfield.gov.uk",
+      "first_name": "Derek",
+      "last_name": "Digger",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "date_joined": "2025-09-15T09:30:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 5,
+    "fields": {
+      "username": "prime_contractors",
+      "password": "pbkdf2_sha256$1000000$INpRPTUVYnydHTTPSn170t$6fGrRf/KqZdCHSDPww48vM80s/BxogwtJ5ni1kOZ8I8=",
+      "email": "info@primecontractors.com",
+      "first_name": "Sarah",
+      "last_name": "Prime",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "date_joined": "2025-10-02T09:00:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 6,
+    "fields": {
+      "username": "leeds_council",
+      "password": "pbkdf2_sha256$1000000$INpRPTUVYnydHTTPSn170t$6fGrRf/KqZdCHSDPww48vM80s/BxogwtJ5ni1kOZ8I8=",
+      "email": "planning@leeds.gov.uk",
+      "first_name": "Emma",
+      "last_name": "Thompson",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "date_joined": "2025-09-20T10:00:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 7,
+    "fields": {
+      "username": "alpha_construction",
+      "password": "pbkdf2_sha256$1000000$INpRPTUVYnydHTTPSn170t$6fGrRf/KqZdCHSDPww48vM80s/BxogwtJ5ni1kOZ8I8=",
+      "email": "contact@alphaconstruction.com",
+      "first_name": "Michael",
+      "last_name": "Chen",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "date_joined": "2025-10-05T11:00:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 8,
+    "fields": {
+      "username": "beta_builders",
+      "password": "pbkdf2_sha256$1000000$INpRPTUVYnydHTTPSn170t$6fGrRf/KqZdCHSDPww48vM80s/BxogwtJ5ni1kOZ8I8=",
+      "email": "info@betabuilders.co.uk",
+      "first_name": "Rachel",
+      "last_name": "Martinez",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "date_joined": "2025-10-08T08:30:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 9,
+    "fields": {
+      "username": "manchester_council",
+      "password": "pbkdf2_sha256$1000000$INpRPTUVYnydHTTPSn170t$6fGrRf/KqZdCHSDPww48vM80s/BxogwtJ5ni1kOZ8I8=",
+      "email": "procurement@manchester.gov.uk",
+      "first_name": "James",
+      "last_name": "Anderson",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "date_joined": "2025-09-18T14:00:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 10,
+    "fields": {
+      "username": "gamma_developments",
+      "password": "pbkdf2_sha256$1000000$INpRPTUVYnydHTTPSn170t$6fGrRf/KqZdCHSDPww48vM80s/BxogwtJ5ni1kOZ8I8=",
+      "email": "admin@gammadevelopments.com",
+      "first_name": "Lisa",
+      "last_name": "Patel",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "date_joined": "2025-10-10T09:15:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 11,
+    "fields": {
+      "username": "sheffield_council",
+      "password": "pbkdf2_sha256$1000000$INpRPTUVYnydHTTPSn170t$6fGrRf/KqZdCHSDPww48vM80s/BxogwtJ5ni1kOZ8I8=",
+      "email": "contracts@sheffield.gov.uk",
+      "first_name": "David",
+      "last_name": "Hughes",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "date_joined": "2025-09-22T13:00:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 12,
+    "fields": {
+      "username": "delta_contractors",
+      "password": "pbkdf2_sha256$1000000$INpRPTUVYnydHTTPSn170t$6fGrRf/KqZdCHSDPww48vM80s/BxogwtJ5ni1kOZ8I8=",
+      "email": "projects@deltacontractors.com",
+      "first_name": "Sophie",
+      "last_name": "O'Brien",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "date_joined": "2025-10-12T10:45:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 13,
+    "fields": {
+      "username": "omega_construction",
+      "password": "pbkdf2_sha256$1000000$INpRPTUVYnydHTTPSn170t$6fGrRf/KqZdCHSDPww48vM80s/BxogwtJ5ni1kOZ8I8=",
+      "email": "hello@omegaconstruction.co.uk",
+      "first_name": "Thomas",
+      "last_name": "Wright",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "date_joined": "2025-10-15T08:00:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 14,
+    "fields": {
+      "username": "york_council",
+      "password": "pbkdf2_sha256$1000000$INpRPTUVYnydHTTPSn170t$6fGrRf/KqZdCHSDPww48vM80s/BxogwtJ5ni1kOZ8I8=",
+      "email": "services@york.gov.uk",
+      "first_name": "Catherine",
+      "last_name": "Foster",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "date_joined": "2025-09-25T11:30:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 15,
+    "fields": {
+      "username": "epsilon_builders",
+      "password": "pbkdf2_sha256$1000000$INpRPTUVYnydHTTPSn170t$6fGrRf/KqZdCHSDPww48vM80s/BxogwtJ5ni1kOZ8I8=",
+      "email": "contact@epsilonbuilders.com",
+      "first_name": "Andrew",
+      "last_name": "Bennett",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "date_joined": "2025-10-18T09:30:00Z"
+    }
+  }
+]

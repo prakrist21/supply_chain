@@ -1,0 +1,350 @@
+{% extends 'supply_chain/base.html' %}
+
+{% block title %}
+    {% if is_council %}
+        Project Teams - Supply Chain System
+    {% else %}
+        My Teams - Supply Chain System
+    {% endif %}
+{% endblock %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+    * {
+        font-family: 'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    }
+
+    .page-header {
+        margin-bottom: 27px;
+    }
+
+    .page-title {
+        font-size: 28px;
+        font-weight: 800;
+        color: #1A1F2E;
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
+        line-height: 1.6;
+    }
+
+    .page-subtitle {
+        font-size: 15px;
+        color: #6B7280;
+        font-weight: 400;
+        line-height: 1.6;
+    }
+
+    .table-container {
+        background: #FFFFFF;
+        border: 1px solid #E5E7EB;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    thead {
+        background: #F9FAFB;
+        border-bottom: 1px solid #E5E7EB;
+    }
+
+    th {
+        padding: 14px 18px;
+        text-align: left;
+        font-size: 12px;
+        font-weight: 600;
+        color: #4B5563;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        white-space: nowrap;
+    }
+
+    tbody tr {
+        border-bottom: 1px solid #E5E7EB;
+        transition: all 0.15s ease;
+    }
+
+    tbody tr:hover {
+        background: #F9FAFB;
+    }
+
+    td {
+        padding: 16px 18px;
+        font-size: 14px;
+        color: #1A1F2E;
+    }
+
+    .team-cell {
+        font-weight: 600;
+    }
+
+    .project-cell {
+        color: #6B7280;
+        font-size: 13px;
+    }
+
+    .council-cell {
+        color: #9CA3AF;
+        font-size: 13px;
+    }
+
+    .count-cell {
+        font-weight: 700;
+        color: #00BF62;
+        font-size: 15px;
+    }
+
+    .date-cell {
+        color: #6B7280;
+        font-size: 13px;
+    }
+
+    .btn-view {
+        padding: 7px 13px;
+        background: #00BF62;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        display: inline-block;
+    }
+
+    .btn-view:hover {
+        background: #009951;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 56px 18px;
+        background: #F9FAFB;
+        border-radius: 12px;
+        border: 1px solid #E5E7EB;
+    }
+
+    .empty-icon {
+        font-size: 48px;
+        margin-bottom: 18px;
+        opacity: 0.5;
+    }
+
+    .empty-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1A1F2E;
+        margin-bottom: 9px;
+        line-height: 1.6;
+    }
+
+    .empty-text {
+        font-size: 14px;
+        color: #6B7280;
+        margin-bottom: 18px;
+        line-height: 1.6;
+    }
+
+    .btn-browse {
+        display: inline-block;
+        padding: 12px 24px;
+        background: #00BF62;
+        color: #FFFFFF;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.15s ease;
+        box-shadow: 0 4px 12px rgba(0,191,98,0.25);
+        line-height: 1.6;
+    }
+
+    .btn-browse:hover {
+        background: #009951;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin-top: 36px;
+        padding: 22px;
+    }
+
+    .pagination-btn {
+        padding: 11px 17px;
+        background: #FFFFFF;
+        color: #00BF62;
+        border: 1px solid #E5E7EB;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.15s ease;
+        line-height: 1.6;
+    }
+
+    .pagination-btn:hover {
+        background: #E6F9F0;
+        border-color: #00BF62;
+    }
+
+    .pagination-btn.active {
+        background: #00BF62;
+        color: #FFFFFF;
+        border-color: #00BF62;
+    }
+
+    .pagination-btn.disabled {
+        background: #F9FAFB;
+        color: #D1D5DB;
+        border-color: #E5E7EB;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
+    .pagination-info {
+        color: #6B7280;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+        .table-container {
+            border-radius: 10px;
+        }
+
+        th,td {
+            padding: 11px 9px;
+            font-size: 12px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    {% if is_council %}
+        <h1 class="page-title">Project Teams</h1>
+        <p class="page-subtitle">Manage teams for your council's projects</p>
+    {% else %}
+        <h1 class="page-title">My Teams</h1>
+        <p class="page-subtitle">Teams you're a member of</p>
+    {% endif %}
+</div>
+
+{% if page_obj %}
+<div class="table-container">
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Team Name</th>
+                    <th>Project</th>
+                    <th>Council</th>
+                    <th>Team Members</th>
+                    <th>Contractors</th>
+                    <th>Created Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for team in page_obj %}
+                <tr>
+                    <td>
+                        <div class="team-cell">{{ team.name }}</div>
+                    </td>
+                    <td>
+                        <div class="project-cell">{{ team.project.title }}</div>
+                    </td>
+                    <td>
+                        <div class="council-cell">{{ team.project.council.name }}</div>
+                    </td>
+                    <td>
+                        <div class="count-cell">{{ team.member_count_value }}</div>
+                    </td>
+                    <td>
+                        <div class="count-cell">{{ team.contractor_count_value }}</div>
+                    </td>
+                    <td>
+                        <div class="date-cell">{{ team.created_at|date:"M d, Y" }}</div>
+                    </td>
+                    <td>
+                        <a href="{% url 'team_detail' project_id=team.project.id %}" class="btn-view">View Team</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% if page_obj.has_other_pages %}
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?page=1" class="pagination-btn">«</a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="pagination-btn">‹</a>
+    {% else %}
+        <span class="pagination-btn disabled">«</span>
+        <span class="pagination-btn disabled">‹</span>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+            <span class="pagination-btn active">{{ num }}</span>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a href="?page={{ num }}" class="pagination-btn">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="pagination-btn">›</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}" class="pagination-btn">»</a>
+    {% else %}
+        <span class="pagination-btn disabled">›</span>
+        <span class="pagination-btn disabled">»</span>
+    {% endif %}
+
+    <span class="pagination-info">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+</div>
+{% endif %}
+
+{% else %}
+<div class="empty-state">
+    <div class="empty-icon">👥</div>
+    <h3 class="empty-title">
+        {% if is_council %}
+            No Teams Yet
+        {% else %}
+            You're Not in Any Teams
+        {% endif %}
+    </h3>
+    <p class="empty-text">
+        {% if is_council %}
+            Teams are automatically created when you create projects. Start by creating a project and approving bids!
+        {% else %}
+            You'll be added to teams when your bids are approved by councils.
+        {% endif %}
+    </p>
+    {% if is_council %}
+        <a href="{% url 'project_create' %}" class="btn-browse">Create Project</a>
+    {% else %}
+        <a href="{% url 'open_projects' %}" class="btn-browse">Browse Projects</a>
+    {% endif %}
+</div>
+{% endif %}
+
+{% endblock %}

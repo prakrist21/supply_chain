@@ -1,0 +1,266 @@
+[
+  {
+    "model": "supply_chain.package",
+    "pk": 1,
+    "fields": {
+      "title": "Plumbing",
+      "description": "All plumbing works",
+      "project": 1,
+      "budget": 50000,
+      "created_at": "2025-10-01T08:30:00Z",
+      "updated_at": "2025-10-01T08:30:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.package",
+    "pk": 2,
+    "fields": {
+      "title": "Electrical Works",
+      "description": "Complete electrical rewiring and lighting installation",
+      "project": 1,
+      "budget": 80000,
+      "created_at": "2025-10-01T08:35:00Z",
+      "updated_at": "2025-10-01T08:35:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.package",
+    "pk": 3,
+    "fields": {
+      "title": "Carpentry and Joinery",
+      "description": "Wooden fixtures, doors, and window frames",
+      "project": 1,
+      "budget": 65000,
+      "created_at": "2025-10-01T08:40:00Z",
+      "updated_at": "2025-10-01T08:40:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.package",
+    "pk": 4,
+    "fields": {
+      "title": "Painting",
+      "description": "Wall painting and finishing",
+      "project": 2,
+      "budget": 10000,
+      "created_at": "2025-10-05T09:30:00Z",
+      "updated_at": "2025-10-05T09:30:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.package",
+    "pk": 5,
+    "fields": {
+      "title": "Landscaping",
+      "description": "Garden design, planting, and pathways",
+      "project": 2,
+      "budget": 45000,
+      "created_at": "2025-10-05T09:35:00Z",
+      "updated_at": "2025-10-05T09:35:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.package",
+    "pk": 6,
+    "fields": {
+      "title": "Play Equipment Installation",
+      "description": "Installation of playground equipment and safety surfaces",
+      "project": 2,
+      "budget": 35000,
+      "created_at": "2025-10-05T09:40:00Z",
+      "updated_at": "2025-10-05T09:40:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.package",
+    "pk": 7,
+    "fields": {
+      "title": "Structural Extension",
+      "description": "Building extension framework and walls",
+      "project": 3,
+      "budget": 120000,
+      "created_at": "2025-10-10T14:10:00Z",
+      "updated_at": "2025-10-10T14:10:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.package",
+    "pk": 8,
+    "fields": {
+      "title": "Interior Fit-out",
+      "description": "Shelving, furniture, and interior fixtures for computer lab and study rooms",
+      "project": 3,
+      "budget": 55000,
+      "created_at": "2025-10-10T14:15:00Z",
+      "updated_at": "2025-10-10T14:15:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.package",
+    "pk": 9,
+    "fields": {
+      "title": "HVAC Systems",
+      "description": "Heating, ventilation, and air conditioning installation",
+      "project": 3,
+      "budget": 40000,
+      "created_at": "2025-10-10T14:20:00Z",
+      "updated_at": "2025-10-10T14:20:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.package",
+    "pk": 10,
+    "fields": {
+      "title": "Gymnasium Construction",
+      "description": "Main gymnasium building structure and flooring",
+      "project": 4,
+      "budget": 180000,
+      "created_at": "2025-10-15T09:10:00Z",
+      "updated_at": "2025-10-15T09:10:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.package",
+    "pk": 11,
+    "fields": {
+      "title": "Outdoor Courts",
+      "description": "Basketball and tennis court surfacing and line marking",
+      "project": 4,
+      "budget": 75000,
+      "created_at": "2025-10-15T09:15:00Z",
+      "updated_at": "2025-10-15T09:15:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.package",
+    "pk": 12,
+    "fields": {
+      "title": "Changing Facilities",
+      "description": "Changing rooms, showers, and locker installation",
+      "project": 4,
+      "budget": 60000,
+      "created_at": "2025-10-15T09:20:00Z",
+      "updated_at": "2025-10-15T09:20:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.package",
+    "pk": 13,
+    "fields": {
+      "title": "Structural Repairs",
+      "description": "Concrete and steel structural repair work",
+      "project": 5,
+      "budget": 95000,
+      "created_at": "2025-10-08T12:10:00Z",
+      "updated_at": "2025-10-08T12:10:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.package",
+    "pk": 14,
+    "fields": {
+      "title": "Safety Features",
+      "description": "New railings, lighting, and safety barriers",
+      "project": 5,
+      "budget": 35000,
+      "created_at": "2025-10-08T12:15:00Z",
+      "updated_at": "2025-10-08T12:15:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.package",
+    "pk": 15,
+    "fields": {
+      "title": "Paving and Groundwork",
+      "description": "New paving installation and ground leveling",
+      "project": 6,
+      "budget": 140000,
+      "created_at": "2025-10-20T10:40:00Z",
+      "updated_at": "2025-10-20T10:40:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.package",
+    "pk": 16,
+    "fields": {
+      "title": "Street Furniture",
+      "description": "Benches, planters, and decorative features",
+      "project": 6,
+      "budget": 45000,
+      "created_at": "2025-10-20T10:45:00Z",
+      "updated_at": "2025-10-20T10:45:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.package",
+    "pk": 17,
+    "fields": {
+      "title": "Landscaping Design",
+      "description": "Tree planting, flower beds, and green spaces",
+      "project": 6,
+      "budget": 38000,
+      "created_at": "2025-10-20T10:50:00Z",
+      "updated_at": "2025-10-20T10:50:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.package",
+    "pk": 18,
+    "fields": {
+      "title": "Roofing Works",
+      "description": "Complete roof replacement with tiles and waterproofing",
+      "project": 7,
+      "budget": 55000,
+      "created_at": "2025-07-25T14:10:00Z",
+      "updated_at": "2025-07-25T14:10:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.package",
+    "pk": 19,
+    "fields": {
+      "title": "Insulation Upgrade",
+      "description": "Thermal insulation installation in roof and walls",
+      "project": 7,
+      "budget": 25000,
+      "created_at": "2025-07-25T14:15:00Z",
+      "updated_at": "2025-07-25T14:15:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.package",
+    "pk": 20,
+    "fields": {
+      "title": "Equipment Storage Area",
+      "description": "Modern storage facilities and racking systems",
+      "project": 8,
+      "budget": 85000,
+      "created_at": "2025-09-28T11:10:00Z",
+      "updated_at": "2025-09-28T11:10:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.package",
+    "pk": 21,
+    "fields": {
+      "title": "Training Facilities",
+      "description": "Training room fit-out with equipment and simulation tools",
+      "project": 8,
+      "budget": 120000,
+      "created_at": "2025-09-28T11:15:00Z",
+      "updated_at": "2025-09-28T11:15:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.package",
+    "pk": 22,
+    "fields": {
+      "title": "Living Quarters Renovation",
+      "description": "Dormitory, kitchen, and recreational area upgrades",
+      "project": 8,
+      "budget": 95000,
+      "created_at": "2025-09-28T11:20:00Z",
+      "updated_at": "2025-09-28T11:20:00Z"
+    }
+  }
+]

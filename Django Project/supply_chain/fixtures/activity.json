@@ -1,0 +1,744 @@
+[
+  {
+    "model": "supply_chain.activity",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "activity_type": "project_created",
+      "message": "You created new project \"City Hall Renovation\"",
+      "project": 1,
+      "package": null,
+      "bid": null,
+      "is_read": true,
+      "created_at": "2025-10-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 2,
+    "fields": {
+      "user": 1,
+      "activity_type": "package_created",
+      "message": "You added new package \"Plumbing\" in project \"City Hall Renovation\"",
+      "project": 1,
+      "package": 1,
+      "bid": null,
+      "is_read": true,
+      "created_at": "2025-10-01T08:30:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 3,
+    "fields": {
+      "user": 1,
+      "activity_type": "package_created",
+      "message": "You added new package \"Electrical Works\" in project \"City Hall Renovation\"",
+      "project": 1,
+      "package": 2,
+      "bid": null,
+      "is_read": true,
+      "created_at": "2025-10-01T08:35:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 4,
+    "fields": {
+      "user": 1,
+      "activity_type": "package_created",
+      "message": "You added new package \"Carpentry and Joinery\" in project \"City Hall Renovation\"",
+      "project": 1,
+      "package": 3,
+      "bid": null,
+      "is_read": true,
+      "created_at": "2025-10-01T08:40:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 5,
+    "fields": {
+      "user": 2,
+      "activity_type": "bid_placed",
+      "message": "You placed a bid of Rs. 48,000.00 for package \"Plumbing\" in project \"City Hall Renovation\"",
+      "project": 1,
+      "package": 1,
+      "bid": 1,
+      "is_read": true,
+      "created_at": "2025-10-06T10:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 6,
+    "fields": {
+      "user": 1,
+      "activity_type": "bid_received",
+      "message": "New bid received from \"Ace Builders\" for package \"Plumbing\" in project \"City Hall Renovation\"",
+      "project": 1,
+      "package": 1,
+      "bid": 1,
+      "is_read": true,
+      "created_at": "2025-10-06T10:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 7,
+    "fields": {
+      "user": 2,
+      "activity_type": "bid_placed",
+      "message": "You placed a bid of Rs. 78,000.00 for package \"Electrical Works\" in project \"City Hall Renovation\"",
+      "project": 1,
+      "package": 2,
+      "bid": 2,
+      "is_read": true,
+      "created_at": "2025-10-06T10:15:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 8,
+    "fields": {
+      "user": 1,
+      "activity_type": "bid_received",
+      "message": "New bid received from \"Ace Builders\" for package \"Electrical Works\" in project \"City Hall Renovation\"",
+      "project": 1,
+      "package": 2,
+      "bid": 2,
+      "is_read": true,
+      "created_at": "2025-10-06T10:15:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 9,
+    "fields": {
+      "user": 2,
+      "activity_type": "bid_placed",
+      "message": "You placed a bid of Rs. 62,000.00 for package \"Carpentry and Joinery\" in project \"City Hall Renovation\"",
+      "project": 1,
+      "package": 3,
+      "bid": 3,
+      "is_read": true,
+      "created_at": "2025-10-07T09:30:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 10,
+    "fields": {
+      "user": 1,
+      "activity_type": "bid_received",
+      "message": "New bid received from \"Ace Builders\" for package \"Carpentry and Joinery\" in project \"City Hall Renovation\"",
+      "project": 1,
+      "package": 3,
+      "bid": 3,
+      "is_read": false,
+      "created_at": "2025-10-07T09:30:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 11,
+    "fields": {
+      "user": 7,
+      "activity_type": "bid_placed",
+      "message": "You placed a bid of Rs. 68,000.00 for package \"Carpentry and Joinery\" in project \"City Hall Renovation\"",
+      "project": 1,
+      "package": 3,
+      "bid": 4,
+      "is_read": true,
+      "created_at": "2025-10-07T11:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 12,
+    "fields": {
+      "user": 1,
+      "activity_type": "bid_received",
+      "message": "New bid received from \"Alpha Construction\" for package \"Carpentry and Joinery\" in project \"City Hall Renovation\"",
+      "project": 1,
+      "package": 3,
+      "bid": 4,
+      "is_read": false,
+      "created_at": "2025-10-07T11:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 13,
+    "fields": {
+      "user": 1,
+      "activity_type": "bid_approved",
+      "message": "You approved bid from \"Ace Builders\" for package \"Plumbing\" in project \"City Hall Renovation\"",
+      "project": 1,
+      "package": 1,
+      "bid": 1,
+      "is_read": true,
+      "created_at": "2025-10-08T14:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 14,
+    "fields": {
+      "user": 2,
+      "activity_type": "bid_approved",
+      "message": "Your bid of Rs. 48,000.00 for package \"Plumbing\" in project \"City Hall Renovation\" was approved!",
+      "project": 1,
+      "package": 1,
+      "bid": 1,
+      "is_read": false,
+      "created_at": "2025-10-08T14:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 15,
+    "fields": {
+      "user": 1,
+      "activity_type": "bid_approved",
+      "message": "You approved bid from \"Ace Builders\" for package \"Electrical Works\" in project \"City Hall Renovation\"",
+      "project": 1,
+      "package": 2,
+      "bid": 2,
+      "is_read": true,
+      "created_at": "2025-10-09T11:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 16,
+    "fields": {
+      "user": 2,
+      "activity_type": "bid_approved",
+      "message": "Your bid of Rs. 78,000.00 for package \"Electrical Works\" in project \"City Hall Renovation\" was approved!",
+      "project": 1,
+      "package": 2,
+      "bid": 2,
+      "is_read": false,
+      "created_at": "2025-10-09T11:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 17,
+    "fields": {
+      "user": 4,
+      "activity_type": "project_created",
+      "message": "You created new project \"Community Park Construction\"",
+      "project": 2,
+      "package": null,
+      "bid": null,
+      "is_read": true,
+      "created_at": "2025-10-05T11:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 18,
+    "fields": {
+      "user": 4,
+      "activity_type": "package_created",
+      "message": "You added new package \"Painting\" in project \"Community Park Construction\"",
+      "project": 2,
+      "package": 4,
+      "bid": null,
+      "is_read": true,
+      "created_at": "2025-10-05T09:30:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 19,
+    "fields": {
+      "user": 4,
+      "activity_type": "package_created",
+      "message": "You added new package \"Landscaping\" in project \"Community Park Construction\"",
+      "project": 2,
+      "package": 5,
+      "bid": null,
+      "is_read": true,
+      "created_at": "2025-10-05T09:35:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 20,
+    "fields": {
+      "user": 4,
+      "activity_type": "package_created",
+      "message": "You added new package \"Play Equipment Installation\" in project \"Community Park Construction\"",
+      "project": 2,
+      "package": 6,
+      "bid": null,
+      "is_read": true,
+      "created_at": "2025-10-05T09:40:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 21,
+    "fields": {
+      "user": 5,
+      "activity_type": "bid_placed",
+      "message": "You placed a bid of Rs. 9,500.00 for package \"Painting\" in project \"Community Park Construction\"",
+      "project": 2,
+      "package": 4,
+      "bid": 5,
+      "is_read": true,
+      "created_at": "2025-10-07T11:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 22,
+    "fields": {
+      "user": 4,
+      "activity_type": "bid_received",
+      "message": "New bid received from \"Prime Contractors\" for package \"Painting\" in project \"Community Park Construction\"",
+      "project": 2,
+      "package": 4,
+      "bid": 5,
+      "is_read": true,
+      "created_at": "2025-10-07T11:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 23,
+    "fields": {
+      "user": 2,
+      "activity_type": "bid_placed",
+      "message": "You placed a bid of Rs. 43,000.00 for package \"Landscaping\" in project \"Community Park Construction\"",
+      "project": 2,
+      "package": 5,
+      "bid": 6,
+      "is_read": true,
+      "created_at": "2025-10-08T08:30:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 24,
+    "fields": {
+      "user": 4,
+      "activity_type": "bid_received",
+      "message": "New bid received from \"Ace Builders\" for package \"Landscaping\" in project \"Community Park Construction\"",
+      "project": 2,
+      "package": 5,
+      "bid": 6,
+      "is_read": false,
+      "created_at": "2025-10-08T08:30:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 25,
+    "fields": {
+      "user": 2,
+      "activity_type": "bid_placed",
+      "message": "You placed a bid of Rs. 33,000.00 for package \"Play Equipment Installation\" in project \"Community Park Construction\"",
+      "project": 2,
+      "package": 6,
+      "bid": 7,
+      "is_read": true,
+      "created_at": "2025-10-08T09:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 26,
+    "fields": {
+      "user": 4,
+      "activity_type": "bid_received",
+      "message": "New bid received from \"Ace Builders\" for package \"Play Equipment Installation\" in project \"Community Park Construction\"",
+      "project": 2,
+      "package": 6,
+      "bid": 7,
+      "is_read": false,
+      "created_at": "2025-10-08T09:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 27,
+    "fields": {
+      "user": 4,
+      "activity_type": "bid_approved",
+      "message": "You approved bid from \"Prime Contractors\" for package \"Painting\" in project \"Community Park Construction\"",
+      "project": 2,
+      "package": 4,
+      "bid": 5,
+      "is_read": true,
+      "created_at": "2025-10-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 28,
+    "fields": {
+      "user": 5,
+      "activity_type": "bid_approved",
+      "message": "Your bid of Rs. 9,500.00 for package \"Painting\" in project \"Community Park Construction\" was approved!",
+      "project": 2,
+      "package": 4,
+      "bid": 5,
+      "is_read": false,
+      "created_at": "2025-10-10T10:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 29,
+    "fields": {
+      "user": 1,
+      "activity_type": "project_created",
+      "message": "You created new project \"Library Extension Project\"",
+      "project": 3,
+      "package": null,
+      "bid": null,
+      "is_read": true,
+      "created_at": "2025-10-10T14:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 30,
+    "fields": {
+      "user": 1,
+      "activity_type": "package_created",
+      "message": "You added new package \"Structural Extension\" in project \"Library Extension Project\"",
+      "project": 3,
+      "package": 7,
+      "bid": null,
+      "is_read": true,
+      "created_at": "2025-10-10T14:10:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 31,
+    "fields": {
+      "user": 1,
+      "activity_type": "package_created",
+      "message": "You added new package \"Interior Fit-out\" in project \"Library Extension Project\"",
+      "project": 3,
+      "package": 8,
+      "bid": null,
+      "is_read": true,
+      "created_at": "2025-10-10T14:15:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 32,
+    "fields": {
+      "user": 1,
+      "activity_type": "package_created",
+      "message": "You added new package \"HVAC Systems\" in project \"Library Extension Project\"",
+      "project": 3,
+      "package": 9,
+      "bid": null,
+      "is_read": true,
+      "created_at": "2025-10-10T14:20:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 33,
+    "fields": {
+      "user": 2,
+      "activity_type": "bid_placed",
+      "message": "You placed a bid of Rs. 115,000.00 for package \"Structural Extension\" in project \"Library Extension Project\"",
+      "project": 3,
+      "package": 7,
+      "bid": 8,
+      "is_read": true,
+      "created_at": "2025-10-12T10:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 34,
+    "fields": {
+      "user": 1,
+      "activity_type": "bid_received",
+      "message": "New bid received from \"Ace Builders\" for package \"Structural Extension\" in project \"Library Extension Project\"",
+      "project": 3,
+      "package": 7,
+      "bid": 8,
+      "is_read": true,
+      "created_at": "2025-10-12T10:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 35,
+    "fields": {
+      "user": 13,
+      "activity_type": "bid_placed",
+      "message": "You placed a bid of Rs. 125,000.00 for package \"Structural Extension\" in project \"Library Extension Project\"",
+      "project": 3,
+      "package": 7,
+      "bid": 9,
+      "is_read": true,
+      "created_at": "2025-10-12T11:30:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 36,
+    "fields": {
+      "user": 1,
+      "activity_type": "bid_received",
+      "message": "New bid received from \"Omega Construction\" for package \"Structural Extension\" in project \"Library Extension Project\"",
+      "project": 3,
+      "package": 7,
+      "bid": 9,
+      "is_read": false,
+      "created_at": "2025-10-12T11:30:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 37,
+    "fields": {
+      "user": 2,
+      "activity_type": "bid_placed",
+      "message": "You placed a bid of Rs. 53,000.00 for package \"Interior Fit-out\" in project \"Library Extension Project\"",
+      "project": 3,
+      "package": 8,
+      "bid": 10,
+      "is_read": true,
+      "created_at": "2025-10-13T09:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 38,
+    "fields": {
+      "user": 1,
+      "activity_type": "bid_received",
+      "message": "New bid received from \"Ace Builders\" for package \"Interior Fit-out\" in project \"Library Extension Project\"",
+      "project": 3,
+      "package": 8,
+      "bid": 10,
+      "is_read": false,
+      "created_at": "2025-10-13T09:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 39,
+    "fields": {
+      "user": 7,
+      "activity_type": "bid_placed",
+      "message": "You placed a bid of Rs. 38,000.00 for package \"HVAC Systems\" in project \"Library Extension Project\"",
+      "project": 3,
+      "package": 9,
+      "bid": 11,
+      "is_read": true,
+      "created_at": "2025-10-13T10:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 40,
+    "fields": {
+      "user": 1,
+      "activity_type": "bid_received",
+      "message": "New bid received from \"Alpha Construction\" for package \"HVAC Systems\" in project \"Library Extension Project\"",
+      "project": 3,
+      "package": 9,
+      "bid": 11,
+      "is_read": false,
+      "created_at": "2025-10-13T10:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 41,
+    "fields": {
+      "user": 1,
+      "activity_type": "bid_approved",
+      "message": "You approved bid from \"Ace Builders\" for package \"Structural Extension\" in project \"Library Extension Project\"",
+      "project": 3,
+      "package": 7,
+      "bid": 8,
+      "is_read": true,
+      "created_at": "2025-10-14T15:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 42,
+    "fields": {
+      "user": 2,
+      "activity_type": "bid_approved",
+      "message": "Your bid of Rs. 115,000.00 for package \"Structural Extension\" in project \"Library Extension Project\" was approved!",
+      "project": 3,
+      "package": 7,
+      "bid": 8,
+      "is_read": false,
+      "created_at": "2025-10-14T15:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 43,
+    "fields": {
+      "user": 1,
+      "activity_type": "bid_approved",
+      "message": "You approved bid from \"Alpha Construction\" for package \"HVAC Systems\" in project \"Library Extension Project\"",
+      "project": 3,
+      "package": 9,
+      "bid": 11,
+      "is_read": true,
+      "created_at": "2025-10-15T12:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 44,
+    "fields": {
+      "user": 7,
+      "activity_type": "bid_approved",
+      "message": "Your bid of Rs. 38,000.00 for package \"HVAC Systems\" in project \"Library Extension Project\" was approved!",
+      "project": 3,
+      "package": 9,
+      "bid": 11,
+      "is_read": false,
+      "created_at": "2025-10-15T12:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 45,
+    "fields": {
+      "user": 1,
+      "activity_type": "project_created",
+      "message": "You created new project \"School Sports Facility Upgrade\"",
+      "project": 4,
+      "package": null,
+      "bid": null,
+      "is_read": true,
+      "created_at": "2025-10-15T09:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 46,
+    "fields": {
+      "user": 1,
+      "activity_type": "package_created",
+      "message": "You added new package \"Gymnasium Construction\" in project \"School Sports Facility Upgrade\"",
+      "project": 4,
+      "package": 10,
+      "bid": null,
+      "is_read": true,
+      "created_at": "2025-10-15T09:10:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 47,
+    "fields": {
+      "user": 2,
+      "activity_type": "bid_placed",
+      "message": "You placed a bid of Rs. 175,000.00 for package \"Gymnasium Construction\" in project \"School Sports Facility Upgrade\"",
+      "project": 4,
+      "package": 10,
+      "bid": 12,
+      "is_read": true,
+      "created_at": "2025-10-16T08:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 48,
+    "fields": {
+      "user": 1,
+      "activity_type": "bid_received",
+      "message": "New bid received from \"Ace Builders\" for package \"Gymnasium Construction\" in project \"School Sports Facility Upgrade\"",
+      "project": 4,
+      "package": 10,
+      "bid": 12,
+      "is_read": false,
+      "created_at": "2025-10-16T08:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 49,
+    "fields": {
+      "user": 1,
+      "activity_type": "project_created",
+      "message": "You created new project \"Fire Station Modernization\"",
+      "project": 8,
+      "package": null,
+      "bid": null,
+      "is_read": true,
+      "created_at": "2025-09-28T11:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 50,
+    "fields": {
+      "user": 2,
+      "activity_type": "bid_placed",
+      "message": "You placed a bid of Rs. 118,000.00 for package \"Training Facilities\" in project \"Fire Station Modernization\"",
+      "project": 8,
+      "package": 21,
+      "bid": 23,
+      "is_read": true,
+      "created_at": "2025-09-30T10:30:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 51,
+    "fields": {
+      "user": 1,
+      "activity_type": "bid_received",
+      "message": "New bid received from \"Ace Builders\" for package \"Training Facilities\" in project \"Fire Station Modernization\"",
+      "project": 8,
+      "package": 21,
+      "bid": 23,
+      "is_read": true,
+      "created_at": "2025-09-30T10:30:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 52,
+    "fields": {
+      "user": 1,
+      "activity_type": "bid_approved",
+      "message": "You approved bid from \"Ace Builders\" for package \"Training Facilities\" in project \"Fire Station Modernization\"",
+      "project": 8,
+      "package": 21,
+      "bid": 23,
+      "is_read": true,
+      "created_at": "2025-10-02T14:00:00Z"
+    }
+  },
+  {
+    "model": "supply_chain.activity",
+    "pk": 53,
+    "fields": {
+      "user": 2,
+      "activity_type": "bid_approved",
+      "message": "Your bid of Rs. 118,000.00 for package \"Training Facilities\" in project \"Fire Station Modernization\" was approved!",
+      "project": 8,
+      "package": 21,
+      "bid": 23,
+      "is_read": false,
+      "created_at": "2025-10-02T14:00:00Z"
+    }
+  }
+]

@@ -1,0 +1,470 @@
+{% extends 'supply_chain/base.html' %}
+
+{% block title %}Place Bid - {{ package.title }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 24px;
+        font-size: 14px;
+        color: #6B7280;
+    }
+
+    .breadcrumb a {
+        color: #00BF62;
+        text-decoration: none;
+        transition: all 0.15s ease;
+    }
+
+    .breadcrumb a:hover {
+        color: #009951;
+    }
+
+    .breadcrumb-separator {
+        color: #D1D5DB;
+    }
+
+    .page-header {
+        margin-bottom: 32px;
+    }
+
+    .page-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1A1F2E;
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
+    }
+
+    .page-subtitle {
+        font-size: 16px;
+        color: #6B7280;
+        font-weight: 400;
+    }
+
+    .content-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .package-info-banner {
+        background: #FFFFFF;
+        border: 1px solid #E5E7EB;
+        padding: 32px;
+        border-radius: 12px;
+        margin-bottom: 24px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .banner-title {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: #1A1F2E;
+    }
+
+    .banner-project {
+        font-size: 14px;
+        color: #6B7280;
+        margin-bottom: 24px;
+    }
+
+    .banner-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .banner-item {
+        background: #F9FAFB;
+        padding: 16px;
+        border-radius: 10px;
+        border: 1px solid #E5E7EB;
+    }
+
+    .banner-label {
+        font-size: 12px;
+        color: #6B7280;
+        margin-bottom: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+    }
+
+    .banner-value {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1A1F2E;
+    }
+
+    .form-container {
+        background: #FFFFFF;
+        border: 1px solid #E5E7EB;
+        border-radius: 12px;
+        padding: 32px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-section-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #1A1F2E;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #E5E7EB;
+    }
+
+    .form-group {
+        margin-bottom: 24px;
+    }
+
+    .form-label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        color: #1A1F2E;
+        margin-bottom: 8px;
+    }
+
+    .form-label.required::after {
+        content: ' *';
+        color: #EF4444;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid #E5E7EB;
+        border-radius: 10px;
+        font-size: 16px;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        transition: all 0.15s ease;
+        background: #FFFFFF;
+        color: #1A1F2E;
+    }
+
+    .form-input:focus {
+        outline: none;
+        border-color: #00BF62;
+        box-shadow: 0 0 0 3px rgba(0, 191, 98, 0.1);
+    }
+
+    .input-group {
+        position: relative;
+    }
+
+    .input-prefix {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6B7280;
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    .form-input.with-prefix {
+        padding-left: 56px;
+    }
+
+    .form-help {
+        font-size: 14px;
+        color: #6B7280;
+        margin-top: 8px;
+        line-height: 1.6;
+    }
+
+    .budget-warning {
+        background: #FEF3C7;
+        border: 1px solid #FCD34D;
+        border-radius: 10px;
+        padding: 12px 16px;
+        margin-top: 12px;
+        font-size: 14px;
+        color: #92400E;
+        font-weight: 500;
+        line-height: 1.6;
+    }
+
+    .error-message {
+        background: #FEE2E2;
+        border: 1px solid #FCA5A5;
+        border-radius: 10px;
+        padding: 12px 16px;
+        margin-top: 8px;
+        font-size: 14px;
+        color: #991B1B;
+        font-weight: 500;
+        line-height: 1.6;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 12px;
+        padding-top: 24px;
+        margin-top: 24px;
+        border-top: 1px solid #E5E7EB;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .btn-primary {
+        background: #00BF62;
+        color: #FFFFFF;
+        flex: 1;
+        box-shadow: 0 4px 12px rgba(0, 191, 98, 0.25);
+    }
+
+    .btn-primary:hover {
+        background: #009951;
+    }
+
+    .btn-secondary {
+        background: #F3F4F6;
+        color: #374151;
+    }
+
+    .btn-secondary:hover {
+        background: #E5E7EB;
+    }
+
+    .btn-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 20px;
+        background: #F3F4F6;
+        color: #4B5563;
+        border: none;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.15s ease;
+        margin-bottom: 24px;
+    }
+
+    .btn-back:hover {
+        background: #E5E7EB;
+    }
+
+    .messages {
+        margin-bottom: 24px;
+    }
+
+    .alert {
+        padding: 12px 16px;
+        border-radius: 10px;
+        margin-bottom: 12px;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.6;
+    }
+
+    .alert-error {
+        background: #FEE2E2;
+        color: #991B1B;
+        border: 1px solid #FCA5A5;
+    }
+
+    .alert-success {
+        background: #D1FAE5;
+        color: #065F46;
+        border: 1px solid #6EE7B7;
+    }
+
+    .file-input-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 12px;
+    }
+
+    .file-input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .file-input-label {
+        font-size: 13px;
+        color: #6B7280;
+        font-weight: 500;
+    }
+
+    input[type="file"] {
+        font-size: 14px;
+        padding: 8px 12px;
+        border: 1px solid #E5E7EB;
+        border-radius: 10px;
+        background: #FFFFFF;
+        transition: all 0.15s ease;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    input[type="file"]:hover {
+        border-color: #D1D5DB;
+    }
+
+    input[type="file"]:focus {
+        outline: none;
+        border-color: #00BF62;
+        box-shadow: 0 0 0 3px rgba(0, 191, 98, 0.1);
+    }
+
+    @media (max-width: 968px) {
+        .content-grid {
+            max-width: 100%;
+            padding: 0 16px;
+        }
+
+        .banner-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .form-actions {
+            flex-direction: column;
+        }
+
+        .btn-primary {
+            flex: none;
+        }
+
+        .package-info-banner {
+            padding: 24px;
+        }
+
+        .form-container {
+            padding: 24px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<a href="{% url 'package_detail' package.id %}" class="btn-back">
+    &larr; Back to Package
+</a>
+
+<div class="page-header">
+    <h1 class="page-title">Place Your Bid</h1>
+    <p class="page-subtitle">Submit your competitive bid for this package</p>
+</div>
+
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="package-info-banner">
+    <div class="banner-title">{{ package.title }}</div>
+    <div class="banner-project">{{ project.title }} - {{ project.council.name }} Council</div>
+    <div class="banner-grid">
+        <div class="banner-item">
+            <div class="banner-label">Package Budget</div>
+            <div class="banner-value">£ {{ package.budget|floatformat:0 }}</div>
+        </div>
+        <div class="banner-item">
+            <div class="banner-label">Project Budget</div>
+            <div class="banner-value">£ {{ project.budget|floatformat:0 }}</div>
+        </div>
+    </div>
+</div>
+
+<div class="content-grid">
+    <div class="form-container">
+        <h2 class="form-section-title">Your Bid Details</h2>
+
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="{{ form.amount.id_for_label }}" class="form-label required">
+                    Bid Amount (£)
+                </label>
+                <div class="input-group">
+                    <span class="input-prefix">£</span>
+                    {{ form.amount }}
+                </div>
+
+                {% if form.amount.errors %}
+                    {% for error in form.amount.errors %}
+                    <div class="error-message">
+                        {{ error }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+
+                <p class="form-help">
+                    Enter your competitive bid amount. Must not exceed the package budget.
+                </p>
+
+                <div class="budget-warning">
+                    Your bid must be between £ 1 and £ {{ package.budget|floatformat:0 }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Supporting Documents (Optional)</label>
+                <p class="form-help">
+                    Upload up to 3 documents (CV, certificates, company profile, etc.). PDF, DOC, DOCX, JPG, PNG allowed. Max 10MB each.
+                </p>
+
+                <div class="file-input-wrapper">
+                    <div class="file-input-group">
+                        <label for="{{ form.document1.id_for_label }}" class="file-input-label">Document 1</label>
+                        {{ form.document1 }}
+                    </div>
+                    <div class="file-input-group">
+                        <label for="{{ form.document2.id_for_label }}" class="file-input-label">Document 2</label>
+                        {{ form.document2 }}
+                    </div>
+                    <div class="file-input-group">
+                        <label for="{{ form.document3.id_for_label }}" class="file-input-label">Document 3</label>
+                        {{ form.document3 }}
+                    </div>
+                </div>
+
+                {% if form.document1.errors or form.document2.errors or form.document3.errors %}
+                <div class="error-message" style="margin-top: 12px;">
+                    {{ form.document1.errors|first|default:form.document2.errors|first|default:form.document3.errors|first }}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    Submit Bid
+                </button>
+                <a href="{% url 'package_detail' package.id %}" class="btn btn-secondary">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
