@@ -9,19 +9,23 @@ A vanilla Django 5.2.6 starting project ready for development.
    ```bash
    cd "Django Project"
    ```
-4. Run migrations:
+4. Run the requirements file:
+   ```bash
+   pip install -r requirements
+   ```
+5. Run migrations:
     ```bash
    python manage.py migrate
    ```
-5. Load initial data:
+6. Load initial data:
    ```bash
     python manage.py loaddata supply_chain/fixtures/users.json supply_chain/fixtures/councils.json supply_chain/fixtures/contractor.json supply_chain/fixtures/project.json supply_chain/fixtures/package.json supply_chain/fixtures/bid.json supply_chain/fixtures/team.json supply_chain/fixtures/activity.json
     ```
-6. Start the development server:
+7. Start the development server:
     ```bash
    python manage.py runserver
    ```
-7. Access the Django application at the forwarded port (typically port 8000)
+8. Access the Django application at the forwarded port (typically port 8000)
 
 ### Default Credentials
 
